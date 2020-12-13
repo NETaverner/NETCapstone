@@ -18,4 +18,36 @@ if(!require(funModeling)) install.packages("funModeling", repos = "http://cran.u
 if(!require(Momocs)) install.packages("Momocs", repos = "http://cran.us.r-project.org")
 
 # The data file will be loaded from my personal github account
-data <- read.csv("https://github.com/NETaverner/CapStoneNET/DataFiles/adult.csv")
+data <- read.csv("/Users/user/Documents/DataScience/FinalCapstone/NETCapstone/DataFiles/adult.csv")
+
+# attributes 
+# Income 
+
+#Features 
+#Age 
+#WorkingClass
+#fnlwgt
+#education
+#education.num
+#marital.status
+#occupation
+#relationship
+#race
+#sex
+#capital gain
+#capital loss
+#hour.per.week
+#native.country
+
+
+#Data Analysis
+#not looking at capital gain, capital loss, hour.per.week
+
+str(data)
+
+head(data)
+
+summary(data)
+
+#check for NA values
+map(data, function(.x) sum(is.na(.x)))
