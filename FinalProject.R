@@ -1,0 +1,21 @@
+#Librarys
+if(!require(dplyr)) install.packages("dplyr", repos = "http://cran.us.r-project.org")
+if(!require(ggplot2)) install.packages("ggplot2", repos = "http://cran.us.r-project.org")
+if(!require(corrplot)) install.packages("recorrplotadr", repos = "http://cran.us.r-project.org")
+if(!require(gridExtra)) install.packages("gridExtra", repos = "http://cran.us.r-project.org")
+if(!require(pROC)) install.packages("pROC", repos = "http://cran.us.r-project.org")
+if(!require(caTools)) install.packages("caTools", repos = "http://cran.us.r-project.org")
+if(!require(caretEnsemble)) install.packages("caretEnsemble", repos = "http://cran.us.r-project.org")
+if(!require(grid)) install.packages("grid", repos = "http://cran.us.r-project.org")
+if(!require(readr)) install.packages("readr", repos = "http://cran.us.r-project.org")
+if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+if(!require(caret)) install.packages("caret", repos = "http://cran.us.r-project.org")
+if(!require(ggfortify)) install.packages("ggfortify", repos = "http://cran.us.r-project.org")
+if(!require(glmnet)) install.packages("glmnet", repos = "http://cran.us.r-project.org")
+if(!require(randomForest)) install.packages("randomForest", repos = "http://cran.us.r-project.org")
+if(!require(nnet)) install.packages("nnet", repos = "http://cran.us.r-project.org")
+if(!require(funModeling)) install.packages("funModeling", repos = "http://cran.us.r-project.org")
+if(!require(Momocs)) install.packages("Momocs", repos = "http://cran.us.r-project.org")
+
+# The data file will be loaded from my personal github account
+data <- read.csv("https://github.com/NETaverner/CapStoneNET/DataFiles/adult.csv")
