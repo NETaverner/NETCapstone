@@ -1,0 +1,2265 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={NETCapstone},
+  pdfauthor={Netaverner},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+\title{NETCapstone}
+\author{Netaverner}
+\date{13/12/2020}
+
+\begin{document}
+\maketitle
+
+\hypertarget{overview}{%
+\section{Overview}\label{overview}}
+
+This project is related to the Choose-your-own project of the HervardX:
+PH125.9x Data Science: Capstone course.
+
+The report starts by giving a general idea of the project. It then shows
+how the Dataset will be prepared and setup. An exploratory data analysis
+is carried out on the Dataset. This is performed in order to help
+facilitate the develop of a machine learning algorithm(s) that can
+predict whether the Biomechanical features of orthopedic patients is
+Abnormal or Normal. The results of the models created will be examined
+and explaing. Lastly, the report have some concluding remarks and ideas
+for future work.
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+This project focuses on a Biomechanical features of orthopedic patients
+Dataset aqquired from kaggle ({\textbf{???}}). This data contains
+patients that have medical diagnosis that covers, Disk Hernia and
+Spondylolisthesis.
+
+Spondylolisthesis is a spinal condition that affects the lower vertebrae
+(spinal bones). This disease causes one of the lower vertebrae to slip
+forward onto the bone directly beneath it. It's a painful condition but
+treatable in most cases (Moore 2018).
+
+A herniated disk refers to a problem with one of the rubbery cushions
+(disks) that sit between the individual bones (vertebrae) that stack to
+make your spine (Staff, n.d.).
+
+With the medical field introducing more and more machinery and computer
+oriented technology to perform diagnostics on the human body. This
+project tries to show that by using machine learning one should be able
+to having computers or other technology performing diagnosis on humans,
+without the need for human intervention. This could possibly help human
+doctors in the future as machines could possible achieve a medical
+diagnosis more rapidly, if provided with the needed inputs.
+
+This project will make a performance comparison between different
+machine learning algorithms in order to to assess the correctness in
+classifying data with respect to efficiency and effectiveness of each
+algorithm in terms of accuracy, precision, sensitivity and specificity,
+in order to find the best class of patient.
+
+The major models used and tested will be supervised learning models
+(algorithms that learn from labeled data), which are generally used in
+these kinds of data analysis.
+
+\hypertarget{aim}{%
+\subsection{Aim}\label{aim}}
+
+The objective of this report is to train machine learning models to
+predict whether Biomechanical features of a orthopedic patient is
+Abnormal or Normal. Data will be transformed and its dimension reduced
+to reveal patterns in the Dataset and create a more robust analysis.
+
+The optimal model will be selected by selecting the Model that produces
+the best results in the following categories: * accuracy * sensitivity *
+f1 score
+
+Other factors will also be reviewed when select the optimal model.
+
+Though the use of machine learning method the features of orthopedic
+patients will be extracted and classified. The goal is determine whether
+a given sample of patients have Normal or Abnormal features.
+
+The machine learning models in this report try to create a classifier
+that provides a high accuracy level combined with a low rate of
+false-negatives (high sensitivity).
+
+\hypertarget{dataset}{%
+\subsection{Dataset}\label{dataset}}
+
+The report covers the Biomechanical features of orthopedic patients
+Dataset acquired from
+(\url{https://www.kaggle.com/uciml/biomechanical-features-of-orthopedic-patients})
+and created and maintained by UCI Machine Learning (Learning, n.d.).
+
+This report focuses on the .csv file ``column2Cweka.csv (file with two
+class labels)'' this file contains the following:
+
+The categories Disk Hernia and Spondylolisthesis were merged into a
+single category labelled as `abnormal'. Thus, task consists in
+classifying patients as belonging to one out of two categories: Normal
+(100 patients) or Abnormal (210 patients).
+
+The .csv format file containing the data is loaded from my personal
+computer, should one wish to run the .Rmd file please download the
+``column2Cweka.csv'' from the URL displayed earlier and load it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Libraries}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(dplyr)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(ggplot2)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(corrplot)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"recorrplotadr"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(gridExtra)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"gridExtra"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(pROC)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"pROC"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(caTools)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"caTools"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(caretEnsemble)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"caretEnsemble"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(grid)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"grid"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(readr)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"readr"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(tidyverse)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(caret)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"caret"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(ggfortify)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggfortify"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(glmnet)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"glmnet"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(randomForest)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"randomForest"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(nnet)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"nnet"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(funModeling)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"funModeling"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(RefManageR)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"RefManageR"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+\ControlFlowTok{if}\NormalTok{(}\OperatorTok{!}\KeywordTok{require}\NormalTok{(kableExtra)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"kableExtra"}\NormalTok{, }\DataTypeTok{repos =} \StringTok{"http://cran.us.r-project.org"}\NormalTok{)}
+
+\CommentTok{# The data file will be loaded from my personal computer}
+\CommentTok{#Please add own .csv below if wanting to recreate}
+\NormalTok{data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"/Users/user/Documents/DataScience/FinalCapstone/NETCapstone/DataFiles/column_2C_weka.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+\hypertarget{methods-and-analysis}{%
+\section{Methods And Analysis}\label{methods-and-analysis}}
+
+\hypertarget{data-analysis}{%
+\subsection{Data Analysis}\label{data-analysis}}
+
+From observation of the Dataset, one can determine that the Dateset
+consists of 310 observations and 7 variables
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    310 obs. of  7 variables:
+##  $ pelvic_incidence        : num  63 39.1 68.8 69.3 49.7 ...
+##  $ pelvic_tilt.numeric     : num  22.55 10.06 22.22 24.65 9.65 ...
+##  $ lumbar_lordosis_angle   : num  39.6 25 50.1 44.3 28.3 ...
+##  $ sacral_slope            : num  40.5 29 46.6 44.6 40.1 ...
+##  $ pelvic_radius           : num  98.7 114.4 106 101.9 108.2 ...
+##  $ degree_spondylolisthesis: num  -0.254 4.564 -3.53 11.212 7.919 ...
+##  $ class                   : chr  "Abnormal" "Abnormal" "Abnormal" "Abnormal" ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   pelvic_incidence pelvic_tilt.numeric lumbar_lordosis_angle sacral_slope
+## 1         63.02782           22.552586              39.60912     40.47523
+## 2         39.05695           10.060991              25.01538     28.99596
+## 3         68.83202           22.218482              50.09219     46.61354
+## 4         69.29701           24.652878              44.31124     44.64413
+## 5         49.71286            9.652075              28.31741     40.06078
+## 6         40.25020           13.921907              25.12495     26.32829
+##   pelvic_radius degree_spondylolisthesis    class
+## 1      98.67292                -0.254400 Abnormal
+## 2     114.40543                 4.564259 Abnormal
+## 3     105.98514                -3.530317 Abnormal
+## 4     101.86850                11.211523 Abnormal
+## 5     108.16872                 7.918501 Abnormal
+## 6     130.32787                 2.230652 Abnormal
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  pelvic_incidence pelvic_tilt.numeric lumbar_lordosis_angle  sacral_slope   
+##  Min.   : 26.15   Min.   :-6.555      Min.   : 14.00        Min.   : 13.37  
+##  1st Qu.: 46.43   1st Qu.:10.667      1st Qu.: 37.00        1st Qu.: 33.35  
+##  Median : 58.69   Median :16.358      Median : 49.56        Median : 42.40  
+##  Mean   : 60.50   Mean   :17.543      Mean   : 51.93        Mean   : 42.95  
+##  3rd Qu.: 72.88   3rd Qu.:22.120      3rd Qu.: 63.00        3rd Qu.: 52.70  
+##  Max.   :129.83   Max.   :49.432      Max.   :125.74        Max.   :121.43  
+##  pelvic_radius    degree_spondylolisthesis    class          
+##  Min.   : 70.08   Min.   :-11.058          Length:310        
+##  1st Qu.:110.71   1st Qu.:  1.604          Class :character  
+##  Median :118.27   Median : 11.768          Mode  :character  
+##  Mean   :117.92   Mean   : 26.297                            
+##  3rd Qu.:125.47   3rd Qu.: 41.287                            
+##  Max.   :163.07   Max.   :418.543
+\end{verbatim}
+
+One needs to determine if the Dataset contains any missing values
+
+\begin{verbatim}
+## $pelvic_incidence
+## [1] 0
+## 
+## $pelvic_tilt.numeric
+## [1] 0
+## 
+## $lumbar_lordosis_angle
+## [1] 0
+## 
+## $sacral_slope
+## [1] 0
+## 
+## $pelvic_radius
+## [1] 0
+## 
+## $degree_spondylolisthesis
+## [1] 0
+## 
+## $class
+## [1] 0
+\end{verbatim}
+
+There are no NA values in this dataset, but there is an unbalance
+between the datasets proportions :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#check proportions of income groups}
+\KeywordTok{prop.table}\NormalTok{(}\KeywordTok{table}\NormalTok{(data}\OperatorTok{$}\NormalTok{class))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Abnormal    Normal 
+## 0.6774194 0.3225806
+\end{verbatim}
+
+The graph below gives and indication to this disproportion in the target
+variable class:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#plot proportion}
+\KeywordTok{options}\NormalTok{(}\DataTypeTok{repr.plot.width=}\DecValTok{4}\NormalTok{, }\DataTypeTok{repr.plot.height=}\DecValTok{4}\NormalTok{)}
+
+\KeywordTok{ggplot}\NormalTok{(data, }\KeywordTok{aes}\NormalTok{(class))}\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{fill=}\StringTok{"blue"}\NormalTok{,}\DataTypeTok{alpha=}\FloatTok{0.8}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_bw}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Distribution of Class"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{hjust =} \FloatTok{0.5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+Most variables in the dataset are normally distributed as shown in the
+below plot, except for degree\_spondylolisthesis:
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\hypertarget{correlations}{%
+\subsubsection{Correlations}\label{correlations}}
+
+Check correlation
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{correlationMatrix <-}\StringTok{ }\KeywordTok{cor}\NormalTok{(data[,}\DecValTok{0}\OperatorTok{:}\DecValTok{6}\NormalTok{])}
+\NormalTok{correlationMatrix }\OperatorTok{%>%}\StringTok{  }
+\StringTok{  }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{latex_options =} \KeywordTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"scale_down"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[H]
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{l|r|r|r|r|r|r}
+\hline
+  & pelvic\_incidence & pelvic\_tilt.numeric & lumbar\_lordosis\_angle & sacral\_slope & pelvic\_radius & degree\_spondylolisthesis\\
+\hline
+\cellcolor{gray!6}{pelvic\_incidence} & \cellcolor{gray!6}{1.0000000} & \cellcolor{gray!6}{0.6291988} & \cellcolor{gray!6}{0.7172824} & \cellcolor{gray!6}{0.8149600} & \cellcolor{gray!6}{-0.2474672} & \cellcolor{gray!6}{0.6387427}\\
+\hline
+pelvic\_tilt.numeric & 0.6291988 & 1.0000000 & 0.4327639 & 0.0623453 & 0.0326678 & 0.3978623\\
+\hline
+\cellcolor{gray!6}{lumbar\_lordosis\_angle} & \cellcolor{gray!6}{0.7172824} & \cellcolor{gray!6}{0.4327639} & \cellcolor{gray!6}{1.0000000} & \cellcolor{gray!6}{0.5983869} & \cellcolor{gray!6}{-0.0803436} & \cellcolor{gray!6}{0.5336670}\\
+\hline
+sacral\_slope & 0.8149600 & 0.0623453 & 0.5983869 & 1.0000000 & -0.3421283 & 0.5235575\\
+\hline
+\cellcolor{gray!6}{pelvic\_radius} & \cellcolor{gray!6}{-0.2474672} & \cellcolor{gray!6}{0.0326678} & \cellcolor{gray!6}{-0.0803436} & \cellcolor{gray!6}{-0.3421283} & \cellcolor{gray!6}{1.0000000} & \cellcolor{gray!6}{-0.0260650}\\
+\hline
+degree\_spondylolisthesis & 0.6387427 & 0.3978623 & 0.5336670 & 0.5235575 & -0.0260650 & 1.0000000\\
+\hline
+\end{tabular}}
+\end{table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{corrplot}\NormalTok{(correlationMatrix, }\DataTypeTok{order =} \StringTok{"hclust"}\NormalTok{, }\DataTypeTok{tl.cex =} \DecValTok{1}\NormalTok{, }\DataTypeTok{addrect =} \DecValTok{3}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+As seen in plot there seems to be three variables that are highly
+correlated with each other (cor \textgreater= 0.7) (University, n.d.) ,
+these three variables are pelvic\_incidence ,lumbar\_lordosis\_angle and
+sacral\_slope. Due to this we can assume that methods that usually fail
+due to high correlation variable maybe be impacted on badly by the
+current variables. Thus the highly correlated variable will be removed
+as to much correlation can cause some machine learning models to fail.
+
+The Caret R package provides the ``findCorrelation'', which analyses the
+correlation matrix of a data's attributes, it then reports on which
+attributes can be removed.
+
+Following method below proves the assumption of no highly correlated
+variables:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# find Variables that are highly corrected (>0.7)}
+\NormalTok{highlyCorrelated <-}\StringTok{ }\KeywordTok{findCorrelation}\NormalTok{(correlationMatrix, }\DataTypeTok{cutoff=}\FloatTok{0.7}\NormalTok{)}
+\CommentTok{# print indexes of highly correlated attributes}
+\KeywordTok{print}\NormalTok{(highlyCorrelated)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+There is one variables to be removed.
+
+\hypertarget{remove-highly-correlated-variables}{%
+\subsubsection{Remove highly correlated
+variables}\label{remove-highly-correlated-variables}}
+
+By carefully selecting features in ones data can mean the difference
+between poor performance with long training times and great performance
+with short training times.
+
+The highly correlated variable is removed as shown in the code below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data2 <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{!}\NormalTok{highlyCorrelated)}
+\CommentTok{# number of columns after removing correlated variables}
+\KeywordTok{ncol}\NormalTok{(data2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+
+One variable is lost, this being pelvic\_incidence. By removing this one
+variable the data is cleaned from highly correlated variables. Hense
+forth the dataset with the highly correlated variable removed will be
+refered to as the Cleaned Dataset
+
+\newpage
+
+\hypertarget{modeling-approach}{%
+\section{MODELING Approach}\label{modeling-approach}}
+
+\hypertarget{principal-component-analysis-pca}{%
+\subsection{Principal Component Analysis
+{[}PCA{]}}\label{principal-component-analysis-pca}}
+
+For this project the function ``prncomp'' will be used to calculate the
+PCA, this function is chosen as to avoid relecancy and redundancy. The
+``prncomp'' function helps to select components that will avoid
+correlated variables. This is importance as mentioned before highly
+correlated variable can cause problems with clustering analysis.
+
+PCA is usually used with data that contains a large number of variables.
+Although this particular dataset has at max 7 variables the PCA
+technique will be used on the dataset as to see how it performs. PCA
+works by reduces the dimensions of the feature space by feature
+extraction.
+
+PCA is used to reduce the dimensionality of a dataset which consists of
+a large number of variables correlated with each other. The variables
+can be either heavily or lightly correlated. The reduction of
+dimensionality must be done while retaining the variation present in the
+dataset, up to the maximum extent.
+
+The same is done by transforming the variables to a new set of
+variables, which are known as the principal components {[}PCs{]}. Pcs
+are orthogonal and are ordered in such a way that the retention of
+variation present in the original variables decreases when moving down
+the order. By transforming variables in this mannger, the 1st principal
+component retains maximum variation that was present in the original
+components. The principal components are the eigenvectors of a
+covariance matrix, and are therefore are orthogonal.
+
+It is important to note that the dataset on which PCA technique is used
+on, must be scaled. The results are also sensitive to the relative
+scaling. (ProjectPro n.d. )
+
+\hypertarget{pca-on-original-data}{%
+\subsection{PCA on original data}\label{pca-on-original-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PCAData <-}\StringTok{ }\KeywordTok{prcomp}\NormalTok{(data[,}\DecValTok{0}\OperatorTok{:}\DecValTok{6}\NormalTok{], }\DataTypeTok{center =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{scale =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(PCAData, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#summary}
+\KeywordTok{summary}\NormalTok{(PCAData)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Importance of components:
+##                          PC1    PC2    PC3     PC4     PC5       PC6
+## Standard deviation     1.802 1.0930 0.8724 0.68741 0.57098 1.935e-10
+## Proportion of Variance 0.541 0.1991 0.1268 0.07875 0.05434 0.000e+00
+## Cumulative Proportion  0.541 0.7401 0.8669 0.94566 1.00000 1.000e+00
+\end{verbatim}
+
+As seen in the table above the first component can explain 0.541 of the
+variance after applying 4 PCs, 0.94566 of the variance can be explained.
+According to the summary above, 1.0 of the variance can be explained
+after 5 PCS, only a small number of PCs are required as the dataset has
+so few variables
+
+\hypertarget{plot-of-pc1-vs-pc2}{%
+\subsubsection{Plot of PC1 vs PC2}\label{plot-of-pc1-vs-pc2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pcaDf <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(PCAData}\OperatorTok{$}\NormalTok{x)}
+\KeywordTok{ggplot}\NormalTok{(pcaDf, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{PC1, }\DataTypeTok{y=}\NormalTok{PC2, }\DataTypeTok{col=}\NormalTok{data}\OperatorTok{$}\NormalTok{class)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha=}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+From the plot above it can be determined that the first two components
+somewhat separated into two classes. This is caused by the fact that the
+variance explained by these components is not large.
+
+\hypertarget{plot-of-densitys}{%
+\subsubsection{Plot of densitys}\label{plot-of-densitys}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pc1 <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(pcaDf, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{PC1, }\DataTypeTok{fill=}\NormalTok{data}\OperatorTok{$}\NormalTok{class)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_density}\NormalTok{(}\DataTypeTok{alpha=}\FloatTok{0.25}\NormalTok{)  }
+\NormalTok{pc2 <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(pcaDf, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{PC2, }\DataTypeTok{fill=}\NormalTok{data}\OperatorTok{$}\NormalTok{class)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_density}\NormalTok{(}\DataTypeTok{alpha=}\FloatTok{0.25}\NormalTok{)  }
+
+\KeywordTok{grid.arrange}\NormalTok{(pc1, pc2, }\DataTypeTok{ncol=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\hypertarget{pca-cleaned-dataset}{%
+\subsection{PCA Cleaned Dataset}\label{pca-cleaned-dataset}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PCAData2 <-}\StringTok{ }\KeywordTok{prcomp}\NormalTok{(data2[,}\DecValTok{0}\OperatorTok{:}\DecValTok{5}\NormalTok{], }\DataTypeTok{center =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{scale =} \OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(PCAData2, }\DataTypeTok{type=}\StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(PCAData2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Importance of components:
+##                           PC1    PC2    PC3     PC4     PC5
+## Standard deviation     1.5325 1.0930 0.8672 0.68395 0.48679
+## Proportion of Variance 0.4697 0.2389 0.1504 0.09356 0.04739
+## Cumulative Proportion  0.4697 0.7086 0.8590 0.95261 1.00000
+\end{verbatim}
+
+The above table shows that 0.95261 of the variance is explained with 4
+PCs in the transformed dataset data2. There does not seem to be must
+change with having removed the highly correlated variable but the is
+some change in the amount of variance explained by the 4th PCs. Thus
+there seems there is some improvement.
+
+\hypertarget{plot-of-pc1-vs-pc2-1}{%
+\subsubsection{Plot of PC1 vs PC2}\label{plot-of-pc1-vs-pc2-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{PcaDf2 <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(PCAData2}\OperatorTok{$}\NormalTok{x)}
+\KeywordTok{ggplot}\NormalTok{(PcaDf2, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{PC1, }\DataTypeTok{y=}\NormalTok{PC2, }\DataTypeTok{col=}\NormalTok{data}\OperatorTok{$}\NormalTok{class)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{alpha=}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-19-1.pdf}
+
+From the plot above it can be determined that the first two components
+are still somewhat separated into two classes. This is caused by the
+fact that the variance explained by these components is not large. There
+is some change in the density plots, the density plots have narrowed for
+the components and thus this can be see as some improvement.
+
+\hypertarget{plot-of-densitys-1}{%
+\subsubsection{Plot of densitys}\label{plot-of-densitys-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pc12 <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(PcaDf2, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{PC1, }\DataTypeTok{fill=}\NormalTok{data}\OperatorTok{$}\NormalTok{class)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_density}\NormalTok{(}\DataTypeTok{alpha=}\FloatTok{0.25}\NormalTok{)  }
+\NormalTok{pc22 <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(PcaDf2, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{PC2, }\DataTypeTok{fill=}\NormalTok{data}\OperatorTok{$}\NormalTok{class)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_density}\NormalTok{(}\DataTypeTok{alpha=}\FloatTok{0.25}\NormalTok{)  }
+\KeywordTok{grid.arrange}\NormalTok{(pc12, pc22, }\DataTypeTok{ncol=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+\hypertarget{linear-discriminant-analysis-lda}{%
+\section{Linear Discriminant Analysis
+{[}LDA{]}}\label{linear-discriminant-analysis-lda}}
+
+Other than PCA, there is LDA. LDA takes in consideration the different
+classes and could possibly get better results.
+
+The particularity of LDA is that it models the distribution of
+predictors separately in each of the response classes, and then it uses
+Bayes' theorem to estimate the probability. It is important to note that
+LDA assumes a normal distribution for each class, a class-specific mean,
+and a common variance. (Peixeiro, n.d.)
+
+\hypertarget{lda-with-original-data}{%
+\subsection{LDA with original data}\label{lda-with-original-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LdaData <-}\StringTok{ }\NormalTok{MASS}\OperatorTok{::}\KeywordTok{lda}\NormalTok{(class}\OperatorTok{~}\NormalTok{., }\DataTypeTok{data =}\NormalTok{ data, }\DataTypeTok{center =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{scale =} \OtherTok{TRUE}\NormalTok{) }
+\NormalTok{LdaData}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Call:
+## lda(class ~ ., data = data, center = TRUE, scale = TRUE)
+## 
+## Prior probabilities of groups:
+##  Abnormal    Normal 
+## 0.6774194 0.3225806 
+## 
+## Group means:
+##          pelvic_incidence pelvic_tilt.numeric lumbar_lordosis_angle
+## Abnormal         64.69256            19.79111              55.92537
+## Normal           51.68524            12.82141              43.54260
+##          sacral_slope pelvic_radius degree_spondylolisthesis
+## Abnormal     44.90145      115.0777                37.777705
+## Normal       38.86383      123.8908                 2.186572
+## 
+## Coefficients of linear discriminants:
+##                                   LD1
+## pelvic_incidence          0.007884392
+## pelvic_tilt.numeric      -0.032981545
+## lumbar_lordosis_angle    -0.015839324
+## sacral_slope              0.029051984
+## pelvic_radius             0.058779826
+## degree_spondylolisthesis -0.024406328
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Data frame of the LDA for visualization purposes}
+\NormalTok{ldaDataPredict <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(LdaData, data)}\OperatorTok{$}\NormalTok{x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\DataTypeTok{class=}\NormalTok{data}\OperatorTok{$}\NormalTok{class)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{plot-density-of-ld1}{%
+\subsubsection{Plot density of LD1}\label{plot-density-of-ld1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(ldaDataPredict, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{LD1, }\DataTypeTok{fill=}\NormalTok{class)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_density}\NormalTok{(}\DataTypeTok{alpha=}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-22-1.pdf}
+
+\hypertarget{lda-on-cleaned-dataset}{%
+\subsection{LDA on Cleaned Dataset}\label{lda-on-cleaned-dataset}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LdaData2 <-}\StringTok{ }\NormalTok{MASS}\OperatorTok{::}\KeywordTok{lda}\NormalTok{(class}\OperatorTok{~}\NormalTok{., }\DataTypeTok{data =}\NormalTok{ data2, }\DataTypeTok{center =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{scale =} \OtherTok{TRUE}\NormalTok{) }
+\NormalTok{LdaData2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Call:
+## lda(class ~ ., data = data2, center = TRUE, scale = TRUE)
+## 
+## Prior probabilities of groups:
+##  Abnormal    Normal 
+## 0.6774194 0.3225806 
+## 
+## Group means:
+##          pelvic_tilt.numeric lumbar_lordosis_angle sacral_slope pelvic_radius
+## Abnormal            19.79111              55.92537     44.90145      115.0777
+## Normal              12.82141              43.54260     38.86383      123.8908
+##          degree_spondylolisthesis
+## Abnormal                37.777705
+## Normal                   2.186572
+## 
+## Coefficients of linear discriminants:
+##                                  LD1
+## pelvic_tilt.numeric      -0.02509715
+## lumbar_lordosis_angle    -0.01583932
+## sacral_slope              0.03693638
+## pelvic_radius             0.05877983
+## degree_spondylolisthesis -0.02440633
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Data frame of the LDA for visualization purposes}
+\NormalTok{ldaDataPredict2 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(LdaData2, data2)}\OperatorTok{$}\NormalTok{x }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\DataTypeTok{class=}\NormalTok{data2}\OperatorTok{$}\NormalTok{class)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{plot-density-of-ld1-1}{%
+\subsubsection{Plot density of LD1}\label{plot-density-of-ld1-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(ldaDataPredict2, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{LD1, }\DataTypeTok{fill=}\NormalTok{class)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_density}\NormalTok{(}\DataTypeTok{alpha=}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-24-1.pdf}
+There seems to be very little difference in the LDA outputs and plot
+when using the original and cleaned Datasets. The only changes that can
+be noted is the changes in the Coefficients of linear discriminates.
+
+There is a clearer difference between the Normal and Abnormal classes in
+the density plots when using LDA
+
+\newpage
+
+\hypertarget{methods}{%
+\section{Methods}\label{methods}}
+
+\hypertarget{original-dataset}{%
+\subsection{Original dataset}\label{original-dataset}}
+
+\hypertarget{creating-train-and-trainingvalidation-datasets}{%
+\subsubsection{Creating train and training/validation
+datasets}\label{creating-train-and-trainingvalidation-datasets}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DataTypeTok{sample.kind=}\StringTok{"Rounding"}\NormalTok{) }\CommentTok{#if using R 3.5 or earlier, use `set.seed(1)}
+\CommentTok{#Train (80% of data)}
+\NormalTok{datSamplingIndex <-}\StringTok{ }\KeywordTok{createDataPartition}\NormalTok{(data}\OperatorTok{$}\NormalTok{class, }\DataTypeTok{times=}\DecValTok{1}\NormalTok{, }\DataTypeTok{p=}\FloatTok{0.8}\NormalTok{, }\DataTypeTok{list =} \OtherTok{FALSE}\NormalTok{)}
+\NormalTok{trainData <-}\StringTok{ }\NormalTok{data[datSamplingIndex, ]}
+\CommentTok{#Test (20%)}
+\NormalTok{testData <-}\StringTok{ }\NormalTok{data[}\OperatorTok{-}\NormalTok{datSamplingIndex, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{control-the-data}{%
+\subsubsection{Control the data}\label{control-the-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fitControl <-}\StringTok{ }\KeywordTok{trainControl}\NormalTok{(}\DataTypeTok{method=}\StringTok{"cv"}\NormalTok{,    }
+                           \DataTypeTok{number =} \DecValTok{20}\NormalTok{,    }
+                           \DataTypeTok{classProbs =} \OtherTok{TRUE}\NormalTok{,}
+                           \DataTypeTok{summaryFunction =}\NormalTok{ twoClassSummary)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{cleaned-dataset}{%
+\subsection{Cleaned Dataset}\label{cleaned-dataset}}
+
+\hypertarget{creating-train-and-trainingvalidation-datasets-1}{%
+\subsubsection{Creating train and training/validation
+datasets}\label{creating-train-and-trainingvalidation-datasets-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Train (80% of data)}
+\NormalTok{data3 <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{ (}\DataTypeTok{class=}\NormalTok{data}\OperatorTok{$}\NormalTok{class, data2)}
+\NormalTok{trainData2 <-}\StringTok{ }\NormalTok{data3[datSamplingIndex, ]}
+\CommentTok{#Test (20%)}
+\NormalTok{testData2 <-}\StringTok{ }\NormalTok{data3[}\OperatorTok{-}\NormalTok{datSamplingIndex, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{control-the-data-1}{%
+\subsubsection{Control the data}\label{control-the-data-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fitControl2 <-}\StringTok{ }\KeywordTok{trainControl}\NormalTok{(}\DataTypeTok{method=}\StringTok{"cv"}\NormalTok{,    }
+                           \DataTypeTok{number =} \DecValTok{20}\NormalTok{,    }
+                           \DataTypeTok{classProbs =} \OtherTok{TRUE}\NormalTok{,}
+                           \DataTypeTok{summaryFunction =}\NormalTok{ twoClassSummary)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{naive-bayes-model}{%
+\subsection{Naive Bayes Model}\label{naive-bayes-model}}
+
+The Naive Bayesian classifier is based on Bayes' theorem with the
+independence assumptions between predictors. A Naive Bayesian model is
+simple to build, as there are no complicated iterative parameter
+estimation. Bayes theorem provides a way of calculating the posterior
+probability, P(c\textbar x), from P(c), P(x), and P(x\textbar c). Naive
+Bayes classifier assumes that the effect of a predictor (x) value on a
+given class (c) is independent of the values of other predictors. This
+assumption is called class conditional independence.
+
+Although the Naive Bayesian classifier is simplistic it often works
+well. Thus it is widely use as it often outperforms more sophisticated
+classification methods. (``Naive Bayesian,'' n.d.)
+
+\hypertarget{original-dataset-1}{%
+\subsubsection{Original Dataset}\label{original-dataset-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NaiveBayesModel <-}\StringTok{ }\KeywordTok{train}\NormalTok{(class}\OperatorTok{~}\NormalTok{.,}
+\NormalTok{                      trainData,}
+                      \DataTypeTok{method=}\StringTok{"nb"}\NormalTok{,}
+                      \DataTypeTok{metric=}\StringTok{"ROC"}\NormalTok{,}
+                      \DataTypeTok{preProcess=}\KeywordTok{c}\NormalTok{(}\StringTok{'center'}\NormalTok{, }\StringTok{'scale'}\NormalTok{), }\CommentTok{#in order to normalize the data}
+                      \DataTypeTok{trace=}\OtherTok{FALSE}\NormalTok{, }
+                      \DataTypeTok{importance =} \OtherTok{TRUE}\NormalTok{,}
+                      \DataTypeTok{trControl=}\NormalTok{fitControl)}
+
+\NormalTok{NBPrediction <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(NaiveBayesModel, testData)}
+\NormalTok{NBConfMatrix <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(NBPrediction, }\KeywordTok{as.factor}\NormalTok{(testData}\OperatorTok{$}\NormalTok{class), }\DataTypeTok{positive =} \StringTok{"Abnormal"}\NormalTok{)}
+\NormalTok{NBConfMatrix}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction Abnormal Normal
+##   Abnormal       25      2
+##   Normal         17     18
+##                                           
+##                Accuracy : 0.6935          
+##                  95% CI : (0.5635, 0.8044)
+##     No Information Rate : 0.6774          
+##     P-Value [Acc > NIR] : 0.452354        
+##                                           
+##                   Kappa : 0.4139          
+##                                           
+##  Mcnemar's Test P-Value : 0.001319        
+##                                           
+##             Sensitivity : 0.5952          
+##             Specificity : 0.9000          
+##          Pos Pred Value : 0.9259          
+##          Neg Pred Value : 0.5143          
+##              Prevalence : 0.6774          
+##          Detection Rate : 0.4032          
+##    Detection Prevalence : 0.4355          
+##       Balanced Accuracy : 0.7476          
+##                                           
+##        'Positive' Class : Abnormal        
+## 
+\end{verbatim}
+
+\hypertarget{cleaned-dataset-1}{%
+\subsubsection{Cleaned Dataset}\label{cleaned-dataset-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NaiveBayesModel2 <-}\StringTok{ }\KeywordTok{train}\NormalTok{(class}\OperatorTok{~}\NormalTok{.,}
+\NormalTok{                      trainData2,}
+                      \DataTypeTok{method=}\StringTok{"nb"}\NormalTok{,}
+                      \DataTypeTok{metric=}\StringTok{"ROC"}\NormalTok{,}
+                      \DataTypeTok{preProcess=}\KeywordTok{c}\NormalTok{(}\StringTok{'center'}\NormalTok{, }\StringTok{'scale'}\NormalTok{), }\CommentTok{#in order to normalize the data}
+                      \DataTypeTok{trace=}\OtherTok{FALSE}\NormalTok{, }
+                      \DataTypeTok{importance =} \OtherTok{TRUE}\NormalTok{,}
+                      \DataTypeTok{trControl=}\NormalTok{fitControl2)}
+
+\NormalTok{NBPrediction2 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(NaiveBayesModel2, testData2)}
+\NormalTok{NBConfMatrix2 <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(NBPrediction2, }\KeywordTok{as.factor}\NormalTok{(testData2}\OperatorTok{$}\NormalTok{class), }\DataTypeTok{positive =} \StringTok{"Abnormal"}\NormalTok{)}
+\NormalTok{NBConfMatrix2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction Abnormal Normal
+##   Abnormal       27      1
+##   Normal         15     19
+##                                          
+##                Accuracy : 0.7419         
+##                  95% CI : (0.615, 0.8447)
+##     No Information Rate : 0.6774         
+##     P-Value [Acc > NIR] : 0.171207       
+##                                          
+##                   Kappa : 0.501          
+##                                          
+##  Mcnemar's Test P-Value : 0.001154       
+##                                          
+##             Sensitivity : 0.6429         
+##             Specificity : 0.9500         
+##          Pos Pred Value : 0.9643         
+##          Neg Pred Value : 0.5588         
+##              Prevalence : 0.6774         
+##          Detection Rate : 0.4355         
+##    Detection Prevalence : 0.4516         
+##       Balanced Accuracy : 0.7964         
+##                                          
+##        'Positive' Class : Abnormal       
+## 
+\end{verbatim}
+
+There is a positive effect on the Naive Bayes Model from the removal of
+the highly correlated variable.
+
+The accuracy of the Cleaned Dataset model can be noted being 0.7419
+where as the Original Dataset model had and accuracy of 0.6935. It seems
+that the Naive Bayes Model is performing fairly well
+
+In a later discussion other metrics will be discussed, such as:
+
+\begin{itemize}
+\tightlist
+\item
+  Sensitivity (recall) represent the true positive rate: the proportions
+  of actual positives correctly identified.
+\item
+  Specificity is the true negative rate: the proportion of actual
+  negatives correctly identified.
+\item
+  Accuracy is the general score of the classifier model performance as
+  it is the ratio of how many samples are correctly classified to all
+  samples.
+\item
+  F1 score: the harmonic mean of precision and sensitivity.
+\item
+  Accuracy and F1 score would be used to compare the result with the
+  benchmark model.
+\item
+  Precision: the number of correct positive results divided by the
+  number of all positive results returned by the classifier.
+\end{itemize}
+
+\hypertarget{random-forest-rf}{%
+\subsection{Random Forest {[}RF{]}}\label{random-forest-rf}}
+
+The RF is one of the most powerful machine learning algorithms
+available. RF is a supervised machine learning algorithm that can be
+used for both classification and regression tasks. The algorithm
+addresses the shortcomings of decision trees by using a clever tick. Its
+goal is to improve prediction performance and reduce instability by
+averaging multiple decision trees. RF is made from a group of individual
+decision trees, this technique is called Ensemble Learning. A large
+group of uncorrelated decision trees can produce more accurate and
+stable results than any of individual decision trees.
+
+Training a RF for a classification task, is actually training a group of
+decision trees. Then by obtaining all the predictions of each individual
+trees and can use these predictions to predict the class that gets the
+most votes. Although some individual trees produce wrong predictions,
+many can produce accurate predictions. As a group, they can move towards
+accurate predictions. (Pramoditha, n.d.)
+
+\hypertarget{original-dataset-2}{%
+\subsubsection{Original Dataset}\label{original-dataset-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{RandomforestModel <-}\StringTok{ }\KeywordTok{train}\NormalTok{(class}\OperatorTok{~}\NormalTok{.,}
+\NormalTok{                            trainData,}
+                            \DataTypeTok{method=}\StringTok{"rf"}\NormalTok{,  }
+                            \DataTypeTok{metric=}\StringTok{"ROC"}\NormalTok{,}
+                            \CommentTok{#tuneLength=10,}
+                            \CommentTok{#tuneGrid = expand.grid(mtry = c(2, 3, 6)),}
+                            \DataTypeTok{preProcess =} \KeywordTok{c}\NormalTok{(}\StringTok{'center'}\NormalTok{, }\StringTok{'scale'}\NormalTok{),}
+                            \DataTypeTok{trControl=}\NormalTok{fitControl)}
+
+\NormalTok{RFPrediction <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(RandomforestModel, testData)}
+\CommentTok{#Check results}
+\NormalTok{RFConfMatrix <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(RFPrediction, }\KeywordTok{as.factor}\NormalTok{(testData}\OperatorTok{$}\NormalTok{class), }\DataTypeTok{positive =} \StringTok{"Abnormal"}\NormalTok{)}
+\NormalTok{RFConfMatrix}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction Abnormal Normal
+##   Abnormal       35      5
+##   Normal          7     15
+##                                           
+##                Accuracy : 0.8065          
+##                  95% CI : (0.6863, 0.8958)
+##     No Information Rate : 0.6774          
+##     P-Value [Acc > NIR] : 0.01765         
+##                                           
+##                   Kappa : 0.5684          
+##                                           
+##  Mcnemar's Test P-Value : 0.77283         
+##                                           
+##             Sensitivity : 0.8333          
+##             Specificity : 0.7500          
+##          Pos Pred Value : 0.8750          
+##          Neg Pred Value : 0.6818          
+##              Prevalence : 0.6774          
+##          Detection Rate : 0.5645          
+##    Detection Prevalence : 0.6452          
+##       Balanced Accuracy : 0.7917          
+##                                           
+##        'Positive' Class : Abnormal        
+## 
+\end{verbatim}
+
+\hypertarget{plot-of-variable-importance}{%
+\paragraph{Plot of Variable
+Importance}\label{plot-of-variable-importance}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{varImp}\NormalTok{(RandomforestModel)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## rf variable importance
+## 
+##                          Overall
+## degree_spondylolisthesis 100.000
+## pelvic_radius             22.152
+## pelvic_incidence           6.497
+## pelvic_tilt.numeric        2.580
+## lumbar_lordosis_angle      1.760
+## sacral_slope               0.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{varImp}\NormalTok{(RandomforestModel), }\DataTypeTok{main=}\StringTok{"Ranking Of Importance"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-33-1.pdf}
+
+\hypertarget{cleaned-dataset-2}{%
+\subsubsection{Cleaned Dataset}\label{cleaned-dataset-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{RandomforestModel2 <-}\StringTok{ }\KeywordTok{train}\NormalTok{(class}\OperatorTok{~}\NormalTok{.,}
+\NormalTok{                            trainData2,}
+                            \DataTypeTok{method=}\StringTok{"rf"}\NormalTok{,}
+                            \DataTypeTok{metric=}\StringTok{"ROC"}\NormalTok{,}
+                            \DataTypeTok{preProcess =} \KeywordTok{c}\NormalTok{(}\StringTok{'center'}\NormalTok{, }\StringTok{'scale'}\NormalTok{),}
+                            \DataTypeTok{trControl=}\NormalTok{fitControl2)}
+
+\NormalTok{RFPrediction2 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(RandomforestModel2, testData2)}
+\CommentTok{#Check results}
+\NormalTok{RFConfMatrix2 <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(RFPrediction2, }\KeywordTok{as.factor}\NormalTok{(testData2}\OperatorTok{$}\NormalTok{class), }\DataTypeTok{positive =} \StringTok{"Abnormal"}\NormalTok{)}
+\NormalTok{RFConfMatrix2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction Abnormal Normal
+##   Abnormal       35      6
+##   Normal          7     14
+##                                           
+##                Accuracy : 0.7903          
+##                  95% CI : (0.6682, 0.8834)
+##     No Information Rate : 0.6774          
+##     P-Value [Acc > NIR] : 0.03518         
+##                                           
+##                   Kappa : 0.5264          
+##                                           
+##  Mcnemar's Test P-Value : 1.00000         
+##                                           
+##             Sensitivity : 0.8333          
+##             Specificity : 0.7000          
+##          Pos Pred Value : 0.8537          
+##          Neg Pred Value : 0.6667          
+##              Prevalence : 0.6774          
+##          Detection Rate : 0.5645          
+##    Detection Prevalence : 0.6613          
+##       Balanced Accuracy : 0.7667          
+##                                           
+##        'Positive' Class : Abnormal        
+## 
+\end{verbatim}
+
+\hypertarget{plot-of-variable-importance-1}{%
+\paragraph{Plot of Variable
+Importance}\label{plot-of-variable-importance-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{varImp}\NormalTok{(RandomforestModel2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## rf variable importance
+## 
+##                          Overall
+## degree_spondylolisthesis 100.000
+## pelvic_radius             13.310
+## lumbar_lordosis_angle      5.252
+## pelvic_tilt.numeric        4.658
+## sacral_slope               0.000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{varImp}\NormalTok{(RandomforestModel2), }\DataTypeTok{main=}\StringTok{"Ranking Of Importance"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-36-1.pdf}
+
+The removal of the highly correlated variable from the original dataset
+had negitive impact on the Random Forest Model. This can be seen from
+the decrease in the Accuracy and Specificity.
+
+\hypertarget{logistic-regression-model-logreg}{%
+\subsection{Logistic Regression Model
+{[}LogReg{]}}\label{logistic-regression-model-logreg}}
+
+LogReg is mainly used for binary classification. A binary logistic model
+is used to estimate the probability of a binary response based on one or
+more predictor (or independent) variables (features).
+
+\hypertarget{original-dataset-3}{%
+\subsubsection{Original Dataset}\label{original-dataset-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LogRegModel<-}\StringTok{ }\KeywordTok{train}\NormalTok{(class}\OperatorTok{~}\NormalTok{., }\DataTypeTok{data =}\NormalTok{ trainData, }
+                     \DataTypeTok{method =} \StringTok{"glm"}\NormalTok{,}
+                     \DataTypeTok{metric =} \StringTok{"ROC"}\NormalTok{,}
+                     \DataTypeTok{preProcess =} \KeywordTok{c}\NormalTok{(}\StringTok{"scale"}\NormalTok{, }\StringTok{"center"}\NormalTok{),  }\CommentTok{# in order to normalize the data}
+                     \DataTypeTok{trControl=}\NormalTok{ fitControl)}
+
+\NormalTok{LogRegPred <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(LogRegModel, testData)}
+\CommentTok{# Check results}
+\NormalTok{LogRegConfMatrix <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(LogRegPred, }\KeywordTok{as.factor}\NormalTok{(testData}\OperatorTok{$}\NormalTok{class), }\DataTypeTok{positive =} \StringTok{"Abnormal"}\NormalTok{)}
+\NormalTok{LogRegConfMatrix}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction Abnormal Normal
+##   Abnormal       36      5
+##   Normal          6     15
+##                                          
+##                Accuracy : 0.8226         
+##                  95% CI : (0.7047, 0.908)
+##     No Information Rate : 0.6774         
+##     P-Value [Acc > NIR] : 0.008074       
+##                                          
+##                   Kappa : 0.5993         
+##                                          
+##  Mcnemar's Test P-Value : 1.000000       
+##                                          
+##             Sensitivity : 0.8571         
+##             Specificity : 0.7500         
+##          Pos Pred Value : 0.8780         
+##          Neg Pred Value : 0.7143         
+##              Prevalence : 0.6774         
+##          Detection Rate : 0.5806         
+##    Detection Prevalence : 0.6613         
+##       Balanced Accuracy : 0.8036         
+##                                          
+##        'Positive' Class : Abnormal       
+## 
+\end{verbatim}
+
+\hypertarget{plot-of-variable-importance-2}{%
+\paragraph{Plot of Variable
+Importance}\label{plot-of-variable-importance-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{varImp}\NormalTok{(LogRegModel)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## glm variable importance
+## 
+##                            Overall
+## degree_spondylolisthesis 1.000e+02
+## pelvic_radius            6.079e+01
+## lumbar_lordosis_angle    2.707e+00
+## pelvic_tilt.numeric      6.557e-08
+## pelvic_incidence         3.134e-08
+## sacral_slope             0.000e+00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{varImp}\NormalTok{(LogRegModel), }\DataTypeTok{main=}\StringTok{"Ranking Of Importance"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-39-1.pdf}
+
+\hypertarget{cleaned-dataset-3}{%
+\subsubsection{Cleaned Dataset}\label{cleaned-dataset-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LogRegModel2<-}\StringTok{ }\KeywordTok{train}\NormalTok{(class}\OperatorTok{~}\NormalTok{., }\DataTypeTok{data =}\NormalTok{ trainData2, }
+                     \DataTypeTok{method =} \StringTok{"glm"}\NormalTok{,}
+                     \DataTypeTok{metric =} \StringTok{"ROC"}\NormalTok{,}
+                     \DataTypeTok{preProcess =} \KeywordTok{c}\NormalTok{(}\StringTok{"scale"}\NormalTok{, }\StringTok{"center"}\NormalTok{),  }\CommentTok{# in order to normalize the data}
+                     \DataTypeTok{trControl=}\NormalTok{ fitControl2)}
+
+\NormalTok{LogRegPred2 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(LogRegModel2, testData2)}
+\CommentTok{# Check results}
+\NormalTok{LogRegConfMatrix2 <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(LogRegPred2, }\KeywordTok{as.factor}\NormalTok{(testData2}\OperatorTok{$}\NormalTok{class), }\DataTypeTok{positive =} \StringTok{"Abnormal"}\NormalTok{)}
+\NormalTok{LogRegConfMatrix2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction Abnormal Normal
+##   Abnormal       36      5
+##   Normal          6     15
+##                                          
+##                Accuracy : 0.8226         
+##                  95% CI : (0.7047, 0.908)
+##     No Information Rate : 0.6774         
+##     P-Value [Acc > NIR] : 0.008074       
+##                                          
+##                   Kappa : 0.5993         
+##                                          
+##  Mcnemar's Test P-Value : 1.000000       
+##                                          
+##             Sensitivity : 0.8571         
+##             Specificity : 0.7500         
+##          Pos Pred Value : 0.8780         
+##          Neg Pred Value : 0.7143         
+##              Prevalence : 0.6774         
+##          Detection Rate : 0.5806         
+##    Detection Prevalence : 0.6613         
+##       Balanced Accuracy : 0.8036         
+##                                          
+##        'Positive' Class : Abnormal       
+## 
+\end{verbatim}
+
+\hypertarget{plot-of-variable-importance-3}{%
+\paragraph{Plot of Variable
+Importance}\label{plot-of-variable-importance-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{varImp}\NormalTok{(LogRegModel2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## glm variable importance
+## 
+##                          Overall
+## degree_spondylolisthesis  100.00
+## pelvic_radius              59.69
+## pelvic_tilt.numeric        23.80
+## sacral_slope               21.78
+## lumbar_lordosis_angle       0.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{varImp}\NormalTok{(LogRegModel2), }\DataTypeTok{main=}\StringTok{"Ranking Of Importance"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-42-1.pdf}
+
+There is no impact on the LogReg model with the removal of the highly
+correlated variable.
+
+\hypertarget{k-nearest-neighbor-knn-model}{%
+\subsection{K Nearest Neighbor (KNN)
+Model}\label{k-nearest-neighbor-knn-model}}
+
+KNN is a supervised learning algorithms that is commonly used in data
+mining and machine learning. It is a classifier algorithm, learning is
+based ``how similar'' is a data from one another. KNN is a simple
+algorithm that stores all available cases and classifies new cases based
+on a similarity measure. The KNN algorithm assumes that similar things
+exist in close proximity (Harrison, n.d.).
+
+\hypertarget{original-dataset-4}{%
+\subsubsection{Original Dataset}\label{original-dataset-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{KNNModel <-}\StringTok{ }\KeywordTok{train}\NormalTok{(class}\OperatorTok{~}\NormalTok{.,}
+\NormalTok{                   trainData,}
+                   \DataTypeTok{method=}\StringTok{"knn"}\NormalTok{,}
+                   \DataTypeTok{metric=}\StringTok{"ROC"}\NormalTok{,}
+                   \DataTypeTok{preProcess =} \KeywordTok{c}\NormalTok{(}\StringTok{'center'}\NormalTok{, }\StringTok{'scale'}\NormalTok{),}
+                   \DataTypeTok{tuneLength=}\DecValTok{10}\NormalTok{, }
+                   \DataTypeTok{trControl=}\NormalTok{fitControl)}
+
+\NormalTok{KNNPred <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(KNNModel, testData)}
+\NormalTok{KNNConfMatrix <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(KNNPred, }\KeywordTok{as.factor}\NormalTok{(testData}\OperatorTok{$}\NormalTok{class), }\DataTypeTok{positive =} \StringTok{"Abnormal"}\NormalTok{)}
+\NormalTok{KNNConfMatrix}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction Abnormal Normal
+##   Abnormal       32      6
+##   Normal         10     14
+##                                          
+##                Accuracy : 0.7419         
+##                  95% CI : (0.615, 0.8447)
+##     No Information Rate : 0.6774         
+##     P-Value [Acc > NIR] : 0.1712         
+##                                          
+##                   Kappa : 0.4389         
+##                                          
+##  Mcnemar's Test P-Value : 0.4533         
+##                                          
+##             Sensitivity : 0.7619         
+##             Specificity : 0.7000         
+##          Pos Pred Value : 0.8421         
+##          Neg Pred Value : 0.5833         
+##              Prevalence : 0.6774         
+##          Detection Rate : 0.5161         
+##    Detection Prevalence : 0.6129         
+##       Balanced Accuracy : 0.7310         
+##                                          
+##        'Positive' Class : Abnormal       
+## 
+\end{verbatim}
+
+\hypertarget{plot-of-roc-vs-number-of-neighbors}{%
+\paragraph{Plot of ROC vs Number of
+Neighbors}\label{plot-of-roc-vs-number-of-neighbors}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\KeywordTok{ggplot}\NormalTok{(KNNModel))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-44-1} \end{center}
+
+\hypertarget{cleaned-dataset-4}{%
+\subsubsection{Cleaned Dataset}\label{cleaned-dataset-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{KNNModel2 <-}\StringTok{ }\KeywordTok{train}\NormalTok{(class}\OperatorTok{~}\NormalTok{.,}
+\NormalTok{                   trainData2,}
+                   \DataTypeTok{method=}\StringTok{"knn"}\NormalTok{,}
+                   \DataTypeTok{metric=}\StringTok{"ROC"}\NormalTok{,}
+                   \DataTypeTok{preProcess =} \KeywordTok{c}\NormalTok{(}\StringTok{'center'}\NormalTok{, }\StringTok{'scale'}\NormalTok{),}
+                   \DataTypeTok{tuneLength=}\DecValTok{10}\NormalTok{, }
+                   \DataTypeTok{trControl=}\NormalTok{fitControl2)}
+
+\NormalTok{KNNPred2 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(KNNModel2, testData2)}
+\NormalTok{KNNConfMatrix2 <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(KNNPred2, }\KeywordTok{as.factor}\NormalTok{(testData2}\OperatorTok{$}\NormalTok{class), }\DataTypeTok{positive =} \StringTok{"Abnormal"}\NormalTok{)}
+\NormalTok{KNNConfMatrix2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction Abnormal Normal
+##   Abnormal       32      5
+##   Normal         10     15
+##                                           
+##                Accuracy : 0.7581          
+##                  95% CI : (0.6326, 0.8578)
+##     No Information Rate : 0.6774          
+##     P-Value [Acc > NIR] : 0.1089          
+##                                           
+##                   Kappa : 0.4804          
+##                                           
+##  Mcnemar's Test P-Value : 0.3017          
+##                                           
+##             Sensitivity : 0.7619          
+##             Specificity : 0.7500          
+##          Pos Pred Value : 0.8649          
+##          Neg Pred Value : 0.6000          
+##              Prevalence : 0.6774          
+##          Detection Rate : 0.5161          
+##    Detection Prevalence : 0.5968          
+##       Balanced Accuracy : 0.7560          
+##                                           
+##        'Positive' Class : Abnormal        
+## 
+\end{verbatim}
+
+\hypertarget{plot-of-roc-vs-number-of-neighbors-1}{%
+\paragraph{Plot of ROC vs Number of
+Neighbors}\label{plot-of-roc-vs-number-of-neighbors-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\KeywordTok{ggplot}\NormalTok{(KNNModel2))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-46-1} \end{center}
+
+Once again there is very little impact cause by removing the highly
+correlated variables, there is only a small increase in the accuracy
+from the Original to the Cleaned Dataset.
+
+\hypertarget{neural-network-with-lda-model}{%
+\subsection{Neural Network with LDA
+Model}\label{neural-network-with-lda-model}}
+
+Artificial Neural Networks {[}NN{]} is a type of mathematical algorithms
+that imitates the simulation of networks of biological neurons. It tries
+to imatate the human brains neural pathways.
+
+An NN consists of nodes (called neurons) and edges (called synapses).
+Input data is transmitted through the weighted synapses to the neurons.
+The neurons make calculations that are processed and then passed onto
+the next neurons passed to a neuron representing the output (this
+implise that end).
+
+NN creates a weighting for connections between neurons. Once all
+weightings have been trained, the NN is able to use these connection
+make predictions from the input data. NN make use of both forward and
+Backpropagation. Backpropagations the set of learning rules used to
+guide NN. (Yiu 2019)
+
+\hypertarget{original-dataset-5}{%
+\subsubsection{Original Dataset}\label{original-dataset-5}}
+
+\hypertarget{test-and-training-data}{%
+\paragraph{Test and Training data}\label{test-and-training-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trainDataLda <-}\StringTok{ }\NormalTok{ldaDataPredict[datSamplingIndex, ]}
+\NormalTok{testDataLda <-}\StringTok{ }\NormalTok{ldaDataPredict[}\OperatorTok{-}\NormalTok{datSamplingIndex, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{model}{%
+\paragraph{Model}\label{model}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NNLDAModel <-}\StringTok{ }\KeywordTok{train}\NormalTok{(class}\OperatorTok{~}\NormalTok{., }
+\NormalTok{                 trainDataLda,}
+                 \DataTypeTok{method=}\StringTok{"nnet"}\NormalTok{,}
+                 \DataTypeTok{metric=}\StringTok{"ROC"}\NormalTok{,}
+                 \DataTypeTok{preProcess=}\KeywordTok{c}\NormalTok{(}\StringTok{'center'}\NormalTok{, }\StringTok{'scale'}\NormalTok{),}
+                 \DataTypeTok{tuneLength=}\DecValTok{10}\NormalTok{,}
+                 \DataTypeTok{trace=}\OtherTok{FALSE}\NormalTok{,}
+                 \DataTypeTok{trControl=}\NormalTok{fitControl)}
+
+\NormalTok{NNLdaPred <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(NNLDAModel, testDataLda)}
+\NormalTok{NNLdaConfMatrix <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(NNLdaPred, }\KeywordTok{as.factor}\NormalTok{(testDataLda}\OperatorTok{$}\NormalTok{class), }\DataTypeTok{positive =} \StringTok{"Abnormal"}\NormalTok{)}
+\NormalTok{NNLdaConfMatrix}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction Abnormal Normal
+##   Abnormal       35      3
+##   Normal          7     17
+##                                           
+##                Accuracy : 0.8387          
+##                  95% CI : (0.7233, 0.9198)
+##     No Information Rate : 0.6774          
+##     P-Value [Acc > NIR] : 0.003344        
+##                                           
+##                   Kappa : 0.6493          
+##                                           
+##  Mcnemar's Test P-Value : 0.342782        
+##                                           
+##             Sensitivity : 0.8333          
+##             Specificity : 0.8500          
+##          Pos Pred Value : 0.9211          
+##          Neg Pred Value : 0.7083          
+##              Prevalence : 0.6774          
+##          Detection Rate : 0.5645          
+##    Detection Prevalence : 0.6129          
+##       Balanced Accuracy : 0.8417          
+##                                           
+##        'Positive' Class : Abnormal        
+## 
+\end{verbatim}
+
+\hypertarget{cleaned-dataset-5}{%
+\subsubsection{Cleaned Dataset}\label{cleaned-dataset-5}}
+
+\hypertarget{test-and-training-data-1}{%
+\paragraph{Test and Training data}\label{test-and-training-data-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trainDataLda2 <-}\StringTok{ }\NormalTok{ldaDataPredict[datSamplingIndex, ]}
+\NormalTok{testDataLda2 <-}\StringTok{ }\NormalTok{ldaDataPredict[}\OperatorTok{-}\NormalTok{datSamplingIndex, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{model-1}{%
+\paragraph{Model}\label{model-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NNLDAModel2 <-}\StringTok{ }\KeywordTok{train}\NormalTok{(class}\OperatorTok{~}\NormalTok{., }
+\NormalTok{                 trainDataLda2,}
+                 \DataTypeTok{method=}\StringTok{"nnet"}\NormalTok{,}
+                 \DataTypeTok{metric=}\StringTok{"ROC"}\NormalTok{,}
+                 \DataTypeTok{preProcess=}\KeywordTok{c}\NormalTok{(}\StringTok{'center'}\NormalTok{, }\StringTok{'scale'}\NormalTok{),}
+                 \DataTypeTok{tuneLength=}\DecValTok{10}\NormalTok{,}
+                 \DataTypeTok{trace=}\OtherTok{FALSE}\NormalTok{,}
+                 \DataTypeTok{trControl=}\NormalTok{fitControl2)}
+
+\NormalTok{NNLdaPred2 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(NNLDAModel2, testDataLda2)}
+\NormalTok{NNLdaConfMatrix2 <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(NNLdaPred2, }\KeywordTok{as.factor}\NormalTok{(testDataLda2}\OperatorTok{$}\NormalTok{class), }\DataTypeTok{positive =} \StringTok{"Abnormal"}\NormalTok{)}
+\NormalTok{NNLdaConfMatrix2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction Abnormal Normal
+##   Abnormal       35      3
+##   Normal          7     17
+##                                           
+##                Accuracy : 0.8387          
+##                  95% CI : (0.7233, 0.9198)
+##     No Information Rate : 0.6774          
+##     P-Value [Acc > NIR] : 0.003344        
+##                                           
+##                   Kappa : 0.6493          
+##                                           
+##  Mcnemar's Test P-Value : 0.342782        
+##                                           
+##             Sensitivity : 0.8333          
+##             Specificity : 0.8500          
+##          Pos Pred Value : 0.9211          
+##          Neg Pred Value : 0.7083          
+##              Prevalence : 0.6774          
+##          Detection Rate : 0.5645          
+##    Detection Prevalence : 0.6129          
+##       Balanced Accuracy : 0.8417          
+##                                           
+##        'Positive' Class : Abnormal        
+## 
+\end{verbatim}
+
+There has been no impact from using the Cleaned Dataset
+
+\hypertarget{neural-network-with-pca-model}{%
+\subsection{Neural Network with PCA
+Model}\label{neural-network-with-pca-model}}
+
+\hypertarget{original-dataset-6}{%
+\subsubsection{Original Dataset}\label{original-dataset-6}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NNPCAModel <-}\StringTok{ }\KeywordTok{train}\NormalTok{(class}\OperatorTok{~}\NormalTok{.,}
+\NormalTok{                        trainData,}
+                        \DataTypeTok{method=}\StringTok{"nnet"}\NormalTok{,}
+                        \DataTypeTok{metric=}\StringTok{"ROC"}\NormalTok{,}
+                        \DataTypeTok{preProcess=}\KeywordTok{c}\NormalTok{(}\StringTok{'center'}\NormalTok{, }\StringTok{'scale'}\NormalTok{, }\StringTok{'pca'}\NormalTok{),}
+                        \DataTypeTok{tuneLength=}\DecValTok{10}\NormalTok{,}
+                        \DataTypeTok{trace=}\OtherTok{FALSE}\NormalTok{,}
+                        \DataTypeTok{trControl=}\NormalTok{fitControl)}
+
+\NormalTok{NNPcaPred <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(NNPCAModel, testData)}
+\NormalTok{NNPcaConfMatrix <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(NNPcaPred, }\KeywordTok{as.factor}\NormalTok{(testData}\OperatorTok{$}\NormalTok{class), }\DataTypeTok{positive =} \StringTok{"Abnormal"}\NormalTok{)}
+\NormalTok{NNPcaConfMatrix}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction Abnormal Normal
+##   Abnormal       36      5
+##   Normal          6     15
+##                                          
+##                Accuracy : 0.8226         
+##                  95% CI : (0.7047, 0.908)
+##     No Information Rate : 0.6774         
+##     P-Value [Acc > NIR] : 0.008074       
+##                                          
+##                   Kappa : 0.5993         
+##                                          
+##  Mcnemar's Test P-Value : 1.000000       
+##                                          
+##             Sensitivity : 0.8571         
+##             Specificity : 0.7500         
+##          Pos Pred Value : 0.8780         
+##          Neg Pred Value : 0.7143         
+##              Prevalence : 0.6774         
+##          Detection Rate : 0.5806         
+##    Detection Prevalence : 0.6613         
+##       Balanced Accuracy : 0.8036         
+##                                          
+##        'Positive' Class : Abnormal       
+## 
+\end{verbatim}
+
+\hypertarget{plot-of-variable-importance-4}{%
+\paragraph{Plot of Variable
+Importance}\label{plot-of-variable-importance-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{varImp}\NormalTok{(NNPCAModel)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## nnet variable importance
+## 
+##      Overall
+## PC4 100.0000
+## PC5  41.1974
+## PC1  36.8820
+## PC2   0.7919
+## PC3   0.0000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{varImp}\NormalTok{(NNPCAModel), }\DataTypeTok{main=}\StringTok{"Ranking Of Importance"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-53-1.pdf}
+
+\hypertarget{cleaned-dataset-6}{%
+\subsubsection{Cleaned Dataset}\label{cleaned-dataset-6}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{NNPCAModel2 <-}\StringTok{ }\KeywordTok{train}\NormalTok{(class}\OperatorTok{~}\NormalTok{.,}
+\NormalTok{                        trainData2,}
+                        \DataTypeTok{method=}\StringTok{"nnet"}\NormalTok{,}
+                        \DataTypeTok{metric=}\StringTok{"ROC"}\NormalTok{,}
+                        \DataTypeTok{preProcess=}\KeywordTok{c}\NormalTok{(}\StringTok{'center'}\NormalTok{, }\StringTok{'scale'}\NormalTok{, }\StringTok{'pca'}\NormalTok{),}
+                        \DataTypeTok{tuneLength=}\DecValTok{10}\NormalTok{,}
+                        \DataTypeTok{trace=}\OtherTok{FALSE}\NormalTok{,}
+                        \DataTypeTok{trControl=}\NormalTok{fitControl2)}
+
+\NormalTok{NNPcaPred2 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(NNPCAModel2, testData2)}
+\NormalTok{NNPcaConfMatrix2 <-}\StringTok{ }\KeywordTok{confusionMatrix}\NormalTok{(NNPcaPred2, }\KeywordTok{as.factor}\NormalTok{(testData2}\OperatorTok{$}\NormalTok{class), }\DataTypeTok{positive =} \StringTok{"Abnormal"}\NormalTok{)}
+\NormalTok{NNPcaConfMatrix2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction Abnormal Normal
+##   Abnormal       35      5
+##   Normal          7     15
+##                                           
+##                Accuracy : 0.8065          
+##                  95% CI : (0.6863, 0.8958)
+##     No Information Rate : 0.6774          
+##     P-Value [Acc > NIR] : 0.01765         
+##                                           
+##                   Kappa : 0.5684          
+##                                           
+##  Mcnemar's Test P-Value : 0.77283         
+##                                           
+##             Sensitivity : 0.8333          
+##             Specificity : 0.7500          
+##          Pos Pred Value : 0.8750          
+##          Neg Pred Value : 0.6818          
+##              Prevalence : 0.6774          
+##          Detection Rate : 0.5645          
+##    Detection Prevalence : 0.6452          
+##       Balanced Accuracy : 0.7917          
+##                                           
+##        'Positive' Class : Abnormal        
+## 
+\end{verbatim}
+
+There has been a negative impact from using the Cleaned Dataset on the
+NN using PCA. This can be seen via the decrease in accuracy from 0.8226
+to 0.8065, from the Original to the Clean Dataset respectively.
+
+\hypertarget{plot-of-variable-importance-5}{%
+\paragraph{Plot of Variable
+Importance}\label{plot-of-variable-importance-5}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{varImp}\NormalTok{(NNPCAModel2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## nnet variable importance
+## 
+##     Overall
+## PC4  100.00
+## PC1   59.60
+## PC3   55.02
+## PC2    0.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{varImp}\NormalTok{(NNPCAModel2), }\DataTypeTok{main=}\StringTok{"Ranking Of Importance"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-56-1.pdf}
+
+\newpage
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+\hypertarget{original-dataset-7}{%
+\subsection{Original DataSet}\label{original-dataset-7}}
+
+\hypertarget{model-comparisions}{%
+\subsubsection{Model Comparisions}\label{model-comparisions}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{models <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{NaiveBayes =}\NormalTok{ NaiveBayesModel, }
+                    \DataTypeTok{LogReg =}\NormalTok{ LogRegModel,}
+                    \DataTypeTok{RandomForest =}\NormalTok{ RandomforestModel,}
+                    \DataTypeTok{KNN =}\NormalTok{ KNNModel,}
+                    \DataTypeTok{NeuralPCA =}\NormalTok{ NNPCAModel,}
+                    \DataTypeTok{NeuralLDA =}\NormalTok{ NNLDAModel)   }
+
+\NormalTok{modelsResults <-}\StringTok{ }\KeywordTok{resamples}\NormalTok{(models)}
+\KeywordTok{summary}\NormalTok{(modelsResults)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## summary.resamples(object = modelsResults)
+## 
+## Models: NaiveBayes, LogReg, RandomForest, KNN, NeuralPCA, NeuralLDA 
+## Number of resamples: 20 
+## 
+## ROC 
+##                   Min.   1st Qu.    Median      Mean   3rd Qu. Max. NA's
+## NaiveBayes   0.7500000 0.8437500 0.8750000 0.8727431 0.9375000    1    0
+## LogReg       0.7812500 0.9019097 0.9375000 0.9303819 1.0000000    1    0
+## RandomForest 0.7500000 0.8750000 0.9270833 0.9119792 0.9722222    1    0
+## KNN          0.6250000 0.8750000 0.9218750 0.8969618 0.9696181    1    0
+## NeuralPCA    0.7777778 0.9140625 0.9375000 0.9361111 0.9696181    1    0
+## NeuralLDA    0.7500000 0.8567708 0.9062500 0.9100694 0.9696181    1    0
+## 
+## Sens 
+##                   Min.   1st Qu.    Median      Mean   3rd Qu.  Max. NA's
+## NaiveBayes   0.5555556 0.6666667 0.7500000 0.7465278 0.7777778 0.875    0
+## LogReg       0.6250000 0.7708333 0.8819444 0.8631944 1.0000000 1.000    0
+## RandomForest 0.7500000 0.8506944 0.8819444 0.8854167 1.0000000 1.000    0
+## KNN          0.6250000 0.7708333 0.8750000 0.8659722 1.0000000 1.000    0
+## NeuralPCA    0.5000000 0.7777778 0.8819444 0.8763889 1.0000000 1.000    0
+## NeuralLDA    0.7500000 0.8506944 0.8888889 0.8819444 0.9166667 1.000    0
+## 
+## Spec 
+##              Min. 1st Qu. Median   Mean 3rd Qu. Max. NA's
+## NaiveBayes   0.50  0.7500  0.750 0.8375  1.0000    1    0
+## LogReg       0.25  0.5000  0.875 0.7875  1.0000    1    0
+## RandomForest 0.50  0.5000  0.750 0.7375  1.0000    1    0
+## KNN          0.25  0.5000  0.750 0.7250  0.8125    1    0
+## NeuralPCA    0.50  0.7500  0.750 0.8250  1.0000    1    0
+## NeuralLDA    0.00  0.6875  0.750 0.7375  1.0000    1    0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\KeywordTok{bwplot}\NormalTok{(modelsResults, }\DataTypeTok{metric=}\StringTok{"ROC"}\NormalTok{,}\DataTypeTok{main =} \StringTok{"Variablities"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-58-1} \end{center}
+
+As we can observe from the plot above, Three models, Naive Bayes ,
+Neural LDA and Random Forest have great variability.
+
+The Receiver Operating characteristic Curve {[}ROC{]} is a graph that
+shows the performance of a classification model at all classification
+thresholds. AUC is the metric measure of the ROC curve of each model.
+This metric is independent of any threshold (Narkhede, n.d.).
+
+The NN LDA model managed to achieve a great Area Under the ROC Curve
+{[}AUC{]} but has a high variability. Secondly the NN PCA managed to
+also achieve a good Area Under the ROC Curve but with less variability
+that the NN LDA which indicates that it is performing better.\\
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{confMatrixs <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
+  \DataTypeTok{NaiveBayes =}\NormalTok{ NBConfMatrix, }
+  \DataTypeTok{LogReg =}\NormalTok{ LogRegConfMatrix,}
+  \DataTypeTok{RandomForest =}\NormalTok{ RFConfMatrix,}
+  \DataTypeTok{KNN =}\NormalTok{ KNNConfMatrix,}
+  \DataTypeTok{NeuralPCA =}\NormalTok{ NNPcaConfMatrix,}
+  \DataTypeTok{NeuralLDA =}\NormalTok{ NNPcaConfMatrix)   }
+
+\NormalTok{ConfMatrixResults <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(confMatrixs, }\ControlFlowTok{function}\NormalTok{(x) x}\OperatorTok{$}\NormalTok{byClass)}
+\NormalTok{ConfMatrixResults }\OperatorTok{%>%}\StringTok{ }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}{l|r|r|r|r|r|r}
+\hline
+  & NaiveBayes & LogReg & RandomForest & KNN & NeuralPCA & NeuralLDA\\
+\hline
+Sensitivity & 0.5952381 & 0.8571429 & 0.8333333 & 0.7619048 & 0.8571429 & 0.8571429\\
+\hline
+Specificity & 0.9000000 & 0.7500000 & 0.7500000 & 0.7000000 & 0.7500000 & 0.7500000\\
+\hline
+Pos Pred Value & 0.9259259 & 0.8780488 & 0.8750000 & 0.8421053 & 0.8780488 & 0.8780488\\
+\hline
+Neg Pred Value & 0.5142857 & 0.7142857 & 0.6818182 & 0.5833333 & 0.7142857 & 0.7142857\\
+\hline
+Precision & 0.9259259 & 0.8780488 & 0.8750000 & 0.8421053 & 0.8780488 & 0.8780488\\
+\hline
+Recall & 0.5952381 & 0.8571429 & 0.8333333 & 0.7619048 & 0.8571429 & 0.8571429\\
+\hline
+F1 & 0.7246377 & 0.8674699 & 0.8536585 & 0.8000000 & 0.8674699 & 0.8674699\\
+\hline
+Prevalence & 0.6774194 & 0.6774194 & 0.6774194 & 0.6774194 & 0.6774194 & 0.6774194\\
+\hline
+Detection Rate & 0.4032258 & 0.5806452 & 0.5645161 & 0.5161290 & 0.5806452 & 0.5806452\\
+\hline
+Detection Prevalence & 0.4354839 & 0.6612903 & 0.6451613 & 0.6129032 & 0.6612903 & 0.6612903\\
+\hline
+Balanced Accuracy & 0.7476190 & 0.8035714 & 0.7916667 & 0.7309524 & 0.8035714 & 0.8035714\\
+\hline
+\end{tabular}
+
+\hypertarget{cleaned-dataset-7}{%
+\subsection{Cleaned DataSet}\label{cleaned-dataset-7}}
+
+\hypertarget{model-comparisions-1}{%
+\subsubsection{Model Comparisions}\label{model-comparisions-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{models2 <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{NaiveBayes =}\NormalTok{ NaiveBayesModel2, }
+                    \DataTypeTok{LogReg =}\NormalTok{ LogRegModel2,}
+                    \DataTypeTok{RandomForest =}\NormalTok{ RandomforestModel2,}
+                    \DataTypeTok{KNN =}\NormalTok{ KNNModel2,}
+                    \DataTypeTok{NeuralPCA =}\NormalTok{ NNPCAModel2,}
+                    \DataTypeTok{NeuralLDA =}\NormalTok{ NNLDAModel2)   }
+
+\NormalTok{modelsResults2 <-}\StringTok{ }\KeywordTok{resamples}\NormalTok{(models2)}
+\KeywordTok{summary}\NormalTok{(modelsResults2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## summary.resamples(object = modelsResults2)
+## 
+## Models: NaiveBayes, LogReg, RandomForest, KNN, NeuralPCA, NeuralLDA 
+## Number of resamples: 20 
+## 
+## ROC 
+##                   Min.   1st Qu.    Median      Mean  3rd Qu. Max. NA's
+## NaiveBayes   0.6562500 0.8107639 0.8888889 0.8736111 0.937500    1    0
+## LogReg       0.8611111 0.8888889 0.9409722 0.9371528 1.000000    1    0
+## RandomForest 0.7500000 0.8750000 0.9114583 0.9211806 1.000000    1    0
+## KNN          0.7812500 0.8576389 0.9409722 0.9259549 0.984809    1    0
+## NeuralPCA    0.6250000 0.9062500 0.9565972 0.9305556 1.000000    1    0
+## NeuralLDA    0.7222222 0.8854167 0.9270833 0.9208333 1.000000    1    0
+## 
+## Sens 
+##                   Min.   1st Qu.    Median      Mean   3rd Qu. Max. NA's
+## NaiveBayes   0.3750000 0.6250000 0.7500000 0.7409722 0.8784722    1    0
+## LogReg       0.5000000 0.7777778 0.8819444 0.8743056 1.0000000    1    0
+## RandomForest 0.6250000 0.7777778 0.8819444 0.8798611 1.0000000    1    0
+## KNN          0.7500000 0.8506944 0.8888889 0.9048611 1.0000000    1    0
+## NeuralPCA    0.7500000 0.8750000 0.9444444 0.9229167 1.0000000    1    0
+## NeuralLDA    0.6666667 0.8437500 0.8888889 0.8930556 1.0000000    1    0
+## 
+## Spec 
+##              Min. 1st Qu. Median   Mean 3rd Qu. Max. NA's
+## NaiveBayes   0.50  0.7500   1.00 0.8875  1.0000    1    0
+## LogReg       0.50  0.7500   0.75 0.8000  1.0000    1    0
+## RandomForest 0.50  0.5000   0.75 0.7625  1.0000    1    0
+## KNN          0.50  0.6875   0.75 0.7500  0.8125    1    0
+## NeuralPCA    0.00  0.7500   0.75 0.7500  1.0000    1    0
+## NeuralLDA    0.25  0.5000   0.75 0.7375  1.0000    1    0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{bwplot}\NormalTok{(modelsResults2, }\DataTypeTok{metric=}\StringTok{"ROC"}\NormalTok{,}\DataTypeTok{main =} \StringTok{"Variablities"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{NETCapstone_files/figure-latex/unnamed-chunk-61-1} \end{center}
+
+Comparing the Cleaned Dataset to the original it is important to note
+although the had been no real differences seen when running the models.
+There is a clear difference when comparing the variability plots. It is
+clear that by removing the highly correlated variable reduced some of
+the variability in the ROC for particular Models which is good, but also
+has seemed to increase variability in some of the other models
+
+From the plot above it is clear that the models now experiencing the
+greatest variability are Naive Bayes and Neural LDA. The models now with
+the best ROC are the LogReg and Neural PCA.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{confMatrixs2 <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
+  \DataTypeTok{NaiveBayes =}\NormalTok{ NBConfMatrix2, }
+  \DataTypeTok{LogReg =}\NormalTok{ LogRegConfMatrix2,}
+  \DataTypeTok{RandomForest =}\NormalTok{ RFConfMatrix2,}
+  \DataTypeTok{KNN =}\NormalTok{ KNNConfMatrix2,}
+  \DataTypeTok{NeuralPCA =}\NormalTok{ NNPcaConfMatrix2,}
+  \DataTypeTok{NeuralLDA =}\NormalTok{ NNPcaConfMatrix2)   }
+
+\NormalTok{ConfMatrixResults2 <-}\StringTok{ }\KeywordTok{sapply}\NormalTok{(confMatrixs2, }\ControlFlowTok{function}\NormalTok{(x) x}\OperatorTok{$}\NormalTok{byClass)}
+\NormalTok{ConfMatrixResults2 }\OperatorTok{%>%}\StringTok{ }\NormalTok{knitr}\OperatorTok{::}\KeywordTok{kable}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}{l|r|r|r|r|r|r}
+\hline
+  & NaiveBayes & LogReg & RandomForest & KNN & NeuralPCA & NeuralLDA\\
+\hline
+Sensitivity & 0.6428571 & 0.8571429 & 0.8333333 & 0.7619048 & 0.8333333 & 0.8333333\\
+\hline
+Specificity & 0.9500000 & 0.7500000 & 0.7000000 & 0.7500000 & 0.7500000 & 0.7500000\\
+\hline
+Pos Pred Value & 0.9642857 & 0.8780488 & 0.8536585 & 0.8648649 & 0.8750000 & 0.8750000\\
+\hline
+Neg Pred Value & 0.5588235 & 0.7142857 & 0.6666667 & 0.6000000 & 0.6818182 & 0.6818182\\
+\hline
+Precision & 0.9642857 & 0.8780488 & 0.8536585 & 0.8648649 & 0.8750000 & 0.8750000\\
+\hline
+Recall & 0.6428571 & 0.8571429 & 0.8333333 & 0.7619048 & 0.8333333 & 0.8333333\\
+\hline
+F1 & 0.7714286 & 0.8674699 & 0.8433735 & 0.8101266 & 0.8536585 & 0.8536585\\
+\hline
+Prevalence & 0.6774194 & 0.6774194 & 0.6774194 & 0.6774194 & 0.6774194 & 0.6774194\\
+\hline
+Detection Rate & 0.4354839 & 0.5806452 & 0.5645161 & 0.5161290 & 0.5645161 & 0.5645161\\
+\hline
+Detection Prevalence & 0.4516129 & 0.6612903 & 0.6612903 & 0.5967742 & 0.6451613 & 0.6451613\\
+\hline
+Balanced Accuracy & 0.7964286 & 0.8035714 & 0.7666667 & 0.7559524 & 0.7916667 & 0.7916667\\
+\hline
+\end{tabular}
+
+\newpage
+
+\hypertarget{discussion}{%
+\subsection{Discussion}\label{discussion}}
+
+The following metrics will be compared in this discussion:
+
+\begin{itemize}
+\item
+  Accuracy: It is the number of correct predictions made divided by the
+  total number of predictions made, multiplied by 100 to turn it into a
+  percentage.
+\item
+  Precision is the number of True Positives divided by the number of
+  True Positives and False Positives. Or can be referred to as the
+  number of positive predictions divided by the total number of positive
+  class values predicted. This is refered to as the Positive Predictive
+  Value (PPV). A low precision can indicate a large number of False
+  Positives.
+\item
+  Sensitivity or True Positive Rate {[}recall{]} is the number of True
+  Positives divided by the number of True Positives and the number of
+  False Negatives. Or can be seen as the number of positive predictions
+  divided by the number of positive class values in the test data.
+  Recall can be thought of as a measure of a classifiers completeness. A
+  low recall indicates many False Negatives.
+\item
+  The F1 Score is calculated from: 2 x ((precision x recall) /
+  (precision + recall)). It is also called the F Score or the F Measure.
+  The F1 score conveys the balance between the precision and the recall.
+\end{itemize}
+
+\hypertarget{original-dataset-8}{%
+\subsubsection{Original Dataset}\label{original-dataset-8}}
+
+From within the original datset :
+
+The best results for sensitivity (detection of Abnormal features of
+orthopedic patients) is NN Model with the PCA model which also has the
+best F1 score. It should be note the NN Model with PCA model and the NN
+Model with LDA have the same Sensitivity score. As the PCA model has the
+best F1 store it has been rated as best overall.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MaxConfMatrix <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(ConfMatrixResults, }\DecValTok{1}\NormalTok{, which.is.max)}
+\NormalTok{OutputReport <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{metric=}\KeywordTok{names}\NormalTok{(MaxConfMatrix), }
+                            \DataTypeTok{bestModel=}\KeywordTok{colnames}\NormalTok{(ConfMatrixResults)[MaxConfMatrix],}
+                            \DataTypeTok{value=}\KeywordTok{mapply}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x,y) \{ConfMatrixResults[x,y]\}, }
+                                         \KeywordTok{names}\NormalTok{(MaxConfMatrix), }
+\NormalTok{                                         MaxConfMatrix))}
+\KeywordTok{rownames}\NormalTok{(OutputReport) <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{OutputReport}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                  metric  bestModel     value
+## 1           Sensitivity  NeuralLDA 0.8571429
+## 2           Specificity NaiveBayes 0.9000000
+## 3        Pos Pred Value NaiveBayes 0.9259259
+## 4        Neg Pred Value     LogReg 0.7142857
+## 5             Precision NaiveBayes 0.9259259
+## 6                Recall     LogReg 0.8571429
+## 7                    F1  NeuralPCA 0.8674699
+## 8            Prevalence  NeuralPCA 0.6774194
+## 9        Detection Rate  NeuralLDA 0.5806452
+## 10 Detection Prevalence  NeuralLDA 0.6612903
+## 11    Balanced Accuracy     LogReg 0.8035714
+\end{verbatim}
+
+\hypertarget{cleaned-dataset-8}{%
+\subsubsection{Cleaned Dataset}\label{cleaned-dataset-8}}
+
+From within the Cleaned Dataset datset :
+
+The best results for sensitivity (detection of Abnormal features of
+orthopedic patients) is the LogReg which also has the best F1 score.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{MaxConfMatrix2 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(ConfMatrixResults2, }\DecValTok{1}\NormalTok{, which.is.max)}
+\NormalTok{OutputReport2 <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{metric=}\KeywordTok{names}\NormalTok{(MaxConfMatrix2), }
+                            \DataTypeTok{bestModel=}\KeywordTok{colnames}\NormalTok{(ConfMatrixResults2)[MaxConfMatrix2],}
+                            \DataTypeTok{value=}\KeywordTok{mapply}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x,y) \{ConfMatrixResults2[x,y]\}, }
+                                         \KeywordTok{names}\NormalTok{(MaxConfMatrix2), }
+\NormalTok{                                         MaxConfMatrix2))}
+\KeywordTok{rownames}\NormalTok{(OutputReport2) <-}\StringTok{ }\OtherTok{NULL}
+\NormalTok{OutputReport2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                  metric    bestModel     value
+## 1           Sensitivity       LogReg 0.8571429
+## 2           Specificity   NaiveBayes 0.9500000
+## 3        Pos Pred Value   NaiveBayes 0.9642857
+## 4        Neg Pred Value       LogReg 0.7142857
+## 5             Precision   NaiveBayes 0.9642857
+## 6                Recall       LogReg 0.8571429
+## 7                    F1       LogReg 0.8674699
+## 8            Prevalence RandomForest 0.6774194
+## 9        Detection Rate       LogReg 0.5806452
+## 10 Detection Prevalence       LogReg 0.6612903
+## 11    Balanced Accuracy       LogReg 0.8035714
+\end{verbatim}
+
+\newpage
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+This paper treats the Biomechanical features of orthopedic patients
+diagnosis problem as a pattern classification problem. This report
+investigates several machine learning models the optimal model is
+selected by selecting a high accuracy level combined with a low rate of
+false-negatives (meaning high sensitivity).
+
+From this it can be concluded that from the Original Dataset the NN
+Model with the PCA Model had the optimal results for F1 (0.8674699),
+Sensitivity (0.8571429) and Balanced Accuracy (0.8035714).
+
+Secondly it can also be concluded that from the Cleaned Dataset the
+LogReg Model had the optimal results for F1 (0.8674699), Sensitivity
+(0.8571429) and Balanced Accuracy (0.8035714).
+
+To draw a conclusion in good machine learning practise it is always best
+to remove highly correlated variable. Therefore one should theoretical
+use the Cleaned Dataset with the LogReg model when making predictions.
+
+\hypertarget{future-work}{%
+\subsection{Future work}\label{future-work}}
+
+Future work on this particular project should focus on checking whether
+the predictions made by the models that had the optimal results actually
+give outputs that can be trusted. This could be done by supplying the
+Models with unfinished data and comparing the models results to verified
+data.
+
+Also future work should focus on trying to improve the models accuracy
+and reducing the variability further.
+
+\newpage
+
+\hypertarget{appendix}{%
+\section{Appendix}\label{appendix}}
+
+\hypertarget{environment}{%
+\subsection{Environment}\label{environment}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\StringTok{"Operating System:"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Operating System:"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{version}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                _                           
+## platform       x86_64-apple-darwin17.0     
+## arch           x86_64                      
+## os             darwin17.0                  
+## system         x86_64, darwin17.0          
+## status                                     
+## major          4                           
+## minor          0.3                         
+## year           2020                        
+## month          10                          
+## day            10                          
+## svn rev        79318                       
+## language       R                           
+## version.string R version 4.0.3 (2020-10-10)
+## nickname       Bunny-Wunnies Freak Out
+\end{verbatim}
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\leavevmode\hypertarget{ref-KNN2}{}%
+Harrison, Onel. n.d. ``Machine Learning Basics with the K-Nearest
+Neighbors Algorithm.''
+\url{https://towardsdatascience.com/machine-learning-basics-with-the-k-nearest-neighbors-algorithm-6a6e71d01761}.
+
+\leavevmode\hypertarget{ref-Data}{}%
+Learning, UCI Machine. n.d. ``Biomechanical Features of Orthopedic
+Patients.''
+\url{https://www.kaggle.com/uciml/biomechanical-features-of-orthopedic-patients}.
+
+\leavevmode\hypertarget{ref-Spody}{}%
+Moore, Kristeen. 2018. ``Spondylolisthesis.''
+\url{https://www.healthline.com/health/spondylolisthesis}.
+
+\leavevmode\hypertarget{ref-NaiveBay}{}%
+``Naive Bayesian.'' n.d.
+\url{https://www.saedsayad.com/naive_bayesian.htm}.
+
+\leavevmode\hypertarget{ref-ROCCurve}{}%
+Narkhede, Sarang. n.d. ``Understanding Auc - Roc Curve.''
+\url{https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5}.
+
+\leavevmode\hypertarget{ref-LDA2}{}%
+Peixeiro, Marco. n.d. ``The Complete Guide to Classification in
+Python.''
+\url{https://towardsdatascience.com/the-complete-guide-to-classification-in-python-b0e34c92e455}.
+
+\leavevmode\hypertarget{ref-RForest}{}%
+Pramoditha, Rukshan. n.d. ``Random Forests --- an Ensemble of Decision
+Trees.''
+\url{https://towardsdatascience.com/random-forests-an-ensemble-of-decision-trees-37a003084c6c}.
+
+\leavevmode\hypertarget{ref-PCA}{}%
+ProjectPro. n.d. ``Principal Component Analysis Tutorial.'' Accessed
+2020.
+\url{https://www.dezyre.com/data-science-in-python-tutorial/principal-component-analysis-tutorial\#:~:text=The\%20main\%20idea\%20of\%20principal,up\%20to\%20the\%20maximum\%20extent.\&text=As\%20a\%20layman\%2C\%20it\%20is\%20a\%20method\%20of\%20summarizing\%20data.}
+
+\leavevmode\hypertarget{ref-Hernia}{}%
+Staff, Mayo Clinic. n.d. ``Herniated Disk.''
+\url{https://www.mayoclinic.org/diseases-conditions/herniated-disk/symptoms-causes/syc-20354095}.
+
+\leavevmode\hypertarget{ref-Cor}{}%
+University, Andrews. n.d. ``Applied Statistics - Lesson 5.''
+\url{https://www.andrews.edu/~calkins/math/edrm611/edrm05.htm\#:~:text=Correlation\%20coefficients\%20whose\%20magnitude\%20are,can\%20be\%20considered\%20highly\%20correlated.}
+
+\leavevmode\hypertarget{ref-NNs}{}%
+Yiu, Tony. 2019. ``Understanding Neural Networks.''
+\url{https://towardsdatascience.com/understanding-neural-networks-19020b758230}.
+
+\end{document}

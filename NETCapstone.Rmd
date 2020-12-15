@@ -1,0 +1,842 @@
+---
+title: "NETCapstone"
+author: "Netaverner"
+date: "13/12/2020"
+output: pdf_document 
+bibliography: bib.bib
+---
+
+# Overview
+
+This project is related to the Choose-your-own project of the HervardX: PH125.9x Data Science: Capstone course. 
+
+The report starts by giving a general idea of the project. It then shows how the Dataset will be prepared and setup. An exploratory data analysis is carried out on the Dataset. This is performed in order to help facilitate the develop of a machine learning algorithm(s) that can predict whether the Biomechanical features of orthopedic patients is Abnormal or Normal. The results of the models created will be examined and explaing. Lastly, the report have some concluding remarks and ideas for future work.
+
+# Introduction
+
+This project focuses on a Biomechanical features of orthopedic patients Dataset aqquired from kaggle [@data]. 
+This data contains patients that have medical diagnosis that covers, Disk Hernia and Spondylolisthesis.
+
+Spondylolisthesis is a spinal condition that affects the lower vertebrae (spinal bones). This disease causes one of the lower vertebrae to slip forward onto the bone directly beneath it. It’s a painful condition but treatable in most cases [@Spody].
+
+A herniated disk refers to a problem with one of the rubbery cushions (disks) that sit between the individual bones (vertebrae) that stack to make your spine [@Hernia].
+
+With the medical field introducing more and more machinery and computer oriented technology to perform diagnostics on the human body. This project tries to show that by using machine learning one should be able to having computers or other technology performing diagnosis on humans, without the need for human intervention. This could possibly help human doctors in the future as machines could possible achieve a medical diagnosis more rapidly, if provided with the needed inputs.
+
+This project will make a performance comparison between different machine learning algorithms in order to to assess the correctness in classifying data with respect to efficiency and effectiveness of each algorithm in terms of accuracy, precision, sensitivity and specificity, in order to find the best class of patient. 
+ 
+The major models used and tested will be supervised learning models (algorithms that learn from labeled data), which are generally used in these kinds of data analysis.
+
+## Aim
+
+The objective of this report is to train machine learning models to predict whether Biomechanical features of a orthopedic patient is Abnormal or Normal. Data will be transformed and its dimension reduced to reveal patterns in the Dataset and create a more robust analysis.
+
+The optimal model will be selected by selecting the Model that produces the best results in the following categories: 
+* accuracy
+* sensitivity
+* f1 score
+
+Other factors will also be reviewed when select the optimal model.
+
+Though the use of machine learning method the features of orthopedic patients will be extracted and classified. The goal is determine whether a given sample of patients have Normal or Abnormal features.
+
+The machine learning models in this report try to create a classifier that provides a high accuracy level combined with a low rate of false-negatives (high sensitivity). 
+
+## Dataset
+
+The report covers the Biomechanical features of orthopedic patients Dataset acquired from (https://www.kaggle.com/uciml/biomechanical-features-of-orthopedic-patients) and created and maintained by UCI Machine Learning [@Data].
+
+This report focuses on the .csv file "column2Cweka.csv (file with two class labels)" this file contains the following:
+
+The categories Disk Hernia and Spondylolisthesis were merged into a single category labelled as 'abnormal'. Thus, task consists in classifying patients as belonging to one out of two categories: Normal (100 patients) or Abnormal (210 patients).
+
+The .csv format file containing the data is loaded from my personal computer, should one wish to run the .Rmd file please download the "column2Cweka.csv" from the URL displayed earlier and load it.
+
+```{r,warning=FALSE,message=FALSE,error=FALSE}
+#Libraries
+if(!require(dplyr)) install.packages("dplyr", repos = "http://cran.us.r-project.org")
+if(!require(ggplot2)) install.packages("ggplot2", repos = "http://cran.us.r-project.org")
+if(!require(corrplot)) install.packages("recorrplotadr", repos = "http://cran.us.r-project.org")
+if(!require(gridExtra)) install.packages("gridExtra", repos = "http://cran.us.r-project.org")
+if(!require(pROC)) install.packages("pROC", repos = "http://cran.us.r-project.org")
+if(!require(caTools)) install.packages("caTools", repos = "http://cran.us.r-project.org")
+if(!require(caretEnsemble)) install.packages("caretEnsemble", repos = "http://cran.us.r-project.org")
+if(!require(grid)) install.packages("grid", repos = "http://cran.us.r-project.org")
+if(!require(readr)) install.packages("readr", repos = "http://cran.us.r-project.org")
+if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+if(!require(caret)) install.packages("caret", repos = "http://cran.us.r-project.org")
+if(!require(ggfortify)) install.packages("ggfortify", repos = "http://cran.us.r-project.org")
+if(!require(glmnet)) install.packages("glmnet", repos = "http://cran.us.r-project.org")
+if(!require(randomForest)) install.packages("randomForest", repos = "http://cran.us.r-project.org")
+if(!require(nnet)) install.packages("nnet", repos = "http://cran.us.r-project.org")
+if(!require(funModeling)) install.packages("funModeling", repos = "http://cran.us.r-project.org")
+if(!require(RefManageR)) install.packages("RefManageR", repos = "http://cran.us.r-project.org")
+if(!require(kableExtra)) install.packages("kableExtra", repos = "http://cran.us.r-project.org")
+
+# The data file will be loaded from my personal computer
+#Please add own .csv below if wanting to recreate
+data <- read.csv("/Users/user/Documents/DataScience/FinalCapstone/NETCapstone/DataFiles/column_2C_weka.csv")
+```
+
+\newpage
+
+# Methods And Analysis
+
+## Data Analysis
+
+From observation of the Dataset, one can determine that the Dateset consists of 310 observations and 7 variables
+
+```{r}
+str(data)
+```
+
+```{r}
+head(data)
+```
+```{r}
+summary(data)
+```
+
+One needs to determine if the Dataset contains any missing values
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, eval = TRUE}
+#check for NA values
+map(data, function(.x) sum(is.na(.x)))
+```
+
+There are no NA values in this dataset, but there is an unbalance between the datasets proportions : 
+
+```{r}
+#check proportions of income groups
+prop.table(table(data$class))
+```
+
+The graph below gives and indication to this disproportion in the target variable class:
+
+```{r}
+#plot proportion
+options(repr.plot.width=4, repr.plot.height=4)
+
+ggplot(data, aes(class))+
+  geom_bar(fill="blue",alpha=0.8)+
+  theme_bw() +
+  labs(title="Distribution of Class") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+Most variables in the dataset are normally distributed as shown in the below plot, except for degree_spondylolisthesis:
+
+```{r, echo = FALSE}
+data %>% plot_num(bins=10)  
+```
+
+### Correlations
+
+Check correlation
+
+```{r}
+correlationMatrix <- cor(data[,0:6])
+correlationMatrix %>%  
+  knitr::kable() %>% kable_styling(latex_options = c("striped", "scale_down"))
+
+```
+
+```{r}
+corrplot(correlationMatrix, order = "hclust", tl.cex = 1, addrect = 3)  
+```
+
+As seen in plot there seems to be three variables that are highly correlated with each other (cor >= 0.7) [@Cor] , these three variables are pelvic_incidence ,lumbar_lordosis_angle and sacral_slope. Due to this we can assume that methods that usually fail due to high correlation variable maybe be impacted on badly by the current variables. Thus the highly correlated variable will be removed as to much correlation can cause some machine learning models to fail.
+
+The Caret R package provides the "findCorrelation", which analyses the correlation matrix of a data’s attributes, it then reports on which attributes can be removed.
+
+Following method below proves the assumption of no highly correlated variables:
+
+```{r}
+# find Variables that are highly corrected (>0.7)
+highlyCorrelated <- findCorrelation(correlationMatrix, cutoff=0.7)
+# print indexes of highly correlated attributes
+print(highlyCorrelated)
+```
+
+There is one variables to be removed.
+
+### Remove highly correlated variables
+
+By carefully selecting features in ones data can mean the difference between poor performance with long training times and great performance with short training times.
+
+The highly correlated variable is removed as shown in the code below:
+
+```{r,warning=FALSE,error=FALSE,message=FALSE}
+data2 <- data %>% select(!highlyCorrelated)
+# number of columns after removing correlated variables
+ncol(data2)
+```
+
+One variable is lost, this being pelvic_incidence. By removing this one variable the data is cleaned from highly correlated variables. Hense forth the dataset with the highly correlated variable removed will be refered to as the Cleaned Dataset
+
+\newpage
+
+# MODELING Approach
+
+## Principal Component Analysis [PCA]
+
+For this project the function "prncomp" will be used to calculate the PCA, this function is chosen as to avoid relecancy and redundancy. The "prncomp" function helps to select components that will avoid correlated variables. This is importance as mentioned before highly correlated variable can cause problems with clustering analysis. 
+
+PCA is usually used with data that contains a large number of variables. Although this particular dataset has at max 7 variables the PCA technique will be used on the dataset as to see how it performs. PCA works by reduces the dimensions of the feature space by feature extraction.
+
+PCA is used to reduce the dimensionality of a dataset which consists of a large number of variables correlated with each other. The variables can be either heavily or lightly correlated. The reduction of dimensionality must be done while retaining the variation present in the dataset, up to the maximum extent.
+
+The same is done by transforming the variables to a new set of variables, which are known as the principal components [PCs]. Pcs are orthogonal and are ordered in such a way that the retention of variation present in the original variables decreases when moving down the order. By transforming variables in this mannger, the 1st principal component retains maximum variation that was present in the original components. The principal components are the eigenvectors of a covariance matrix, and are therefore are orthogonal.
+
+It is important to note that the dataset on which PCA technique is used on, must be scaled. The results are also sensitive to the relative scaling. [ @PCA ]
+
+## PCA on original data
+
+```{r}
+PCAData <- prcomp(data[,0:6], center = TRUE, scale = TRUE)
+plot(PCAData, type="l")
+```
+
+```{r}
+#summary
+summary(PCAData)
+```
+
+As seen in the table above the first component can explain 0.541 of the variance after applying 4 PCs, 0.94566 of the variance can be explained. According to the summary above, 1.0 of the variance can be explained after 5 PCS, only a small number of PCs are required as the dataset has so few variables
+
+### Plot of PC1 vs PC2
+
+```{r}
+pcaDf <- as.data.frame(PCAData$x)
+ggplot(pcaDf, aes(x=PC1, y=PC2, col=data$class)) + geom_point(alpha=0.5)
+```
+
+From the plot above it can be determined that the first two components somewhat separated into two classes. This is caused by the fact that the variance explained by these components is not large.
+
+
+### Plot of densitys
+
+```{r}
+pc1 <- ggplot(pcaDf, aes(x=PC1, fill=data$class)) + geom_density(alpha=0.25)  
+pc2 <- ggplot(pcaDf, aes(x=PC2, fill=data$class)) + geom_density(alpha=0.25)  
+
+grid.arrange(pc1, pc2, ncol=2)
+```
+
+## PCA Cleaned Dataset
+
+```{r}
+PCAData2 <- prcomp(data2[,0:5], center = TRUE, scale = TRUE)
+plot(PCAData2, type="l")
+```
+
+```{r}
+summary(PCAData2)
+```
+
+The above table shows that 0.95261 of the variance is explained with 4 PCs in the transformed dataset data2. There does not seem to be must change with having removed the highly correlated variable but the is some change in the amount of variance explained by the 4th PCs. Thus there seems there is some improvement.
+
+### Plot of PC1 vs PC2
+
+```{r}
+PcaDf2 <- as.data.frame(PCAData2$x)
+ggplot(PcaDf2, aes(x=PC1, y=PC2, col=data$class)) + geom_point(alpha=0.5)
+```
+
+From the plot above it can be determined that the first two components are still somewhat separated into two classes. This is caused by the fact that the variance explained by these components is not large. There is some change in the density plots, the density plots have narrowed for the components and thus this can be see as some improvement. 
+
+### Plot of densitys
+
+```{r}
+pc12 <- ggplot(PcaDf2, aes(x=PC1, fill=data$class)) + geom_density(alpha=0.25)  
+pc22 <- ggplot(PcaDf2, aes(x=PC2, fill=data$class)) + geom_density(alpha=0.25)  
+grid.arrange(pc12, pc22, ncol=2)
+```
+
+# Linear Discriminant Analysis [LDA]
+
+Other than PCA, there is LDA. LDA takes in consideration the different classes and could possibly get better results.
+
+The particularity of LDA is that it models the distribution of predictors separately in each of the response classes, and then it uses Bayes’ theorem to estimate the probability. It is important to note that LDA assumes a normal distribution for each class, a class-specific mean, and a common variance. [@LDA2]
+
+## LDA with original data
+
+```{r, message=FALSE, warning = FALSE}
+LdaData <- MASS::lda(class~., data = data, center = TRUE, scale = TRUE) 
+LdaData
+#Data frame of the LDA for visualization purposes
+ldaDataPredict <- predict(LdaData, data)$x %>% as.data.frame() %>% cbind(class=data$class)
+```
+
+### Plot density of LD1
+
+```{r}
+ggplot(ldaDataPredict, aes(x=LD1, fill=class)) + geom_density(alpha=0.5)
+```
+
+## LDA on Cleaned Dataset
+
+```{r, message=FALSE, warning = FALSE}
+LdaData2 <- MASS::lda(class~., data = data2, center = TRUE, scale = TRUE) 
+LdaData2
+#Data frame of the LDA for visualization purposes
+ldaDataPredict2 <- predict(LdaData2, data2)$x %>% as.data.frame() %>% cbind(class=data2$class)
+```
+
+### Plot density of LD1
+
+```{r}
+ggplot(ldaDataPredict2, aes(x=LD1, fill=class)) + geom_density(alpha=0.5)
+```
+There seems to be very little difference in the LDA outputs and plot when using the original and cleaned Datasets. The only changes that can be noted is the changes in the Coefficients of linear discriminates.
+
+There is a clearer difference between the Normal and Abnormal classes in the density plots when using LDA
+
+\newpage
+
+# Methods
+
+## Original dataset
+
+### Creating train and training/validation datasets
+
+```{r,warning = FALSE}
+set.seed(1, sample.kind="Rounding") #if using R 3.5 or earlier, use `set.seed(1)
+#Train (80% of data)
+datSamplingIndex <- createDataPartition(data$class, times=1, p=0.8, list = FALSE)
+trainData <- data[datSamplingIndex, ]
+#Test (20%)
+testData <- data[-datSamplingIndex, ]
+```
+
+### Control the data
+```{r}
+fitControl <- trainControl(method="cv",    
+                           number = 20,    
+                           classProbs = TRUE,
+                           summaryFunction = twoClassSummary)
+```
+
+## Cleaned Dataset 
+
+### Creating train and training/validation datasets
+
+```{r,warning = FALSE}
+#Train (80% of data)
+data3 <- cbind (class=data$class, data2)
+trainData2 <- data3[datSamplingIndex, ]
+#Test (20%)
+testData2 <- data3[-datSamplingIndex, ]
+```
+
+### Control the data
+
+```{r}
+fitControl2 <- trainControl(method="cv",    
+                           number = 20,    
+                           classProbs = TRUE,
+                           summaryFunction = twoClassSummary)
+```
+
+## Naive Bayes Model
+
+The Naive Bayesian classifier is based on Bayes’ theorem with the independence assumptions between predictors. A Naive Bayesian model is simple to build, as there are no complicated iterative parameter estimation. Bayes theorem provides a way of calculating the posterior probability, P(c|x), from P(c), P(x), and P(x|c). Naive Bayes classifier assumes that the effect of a predictor (x) value on a given class (c) is independent of the values of other predictors. This assumption is called class conditional independence.
+
+Although the Naive Bayesian classifier is simplistic it often works well. Thus it is widely use as it often outperforms more sophisticated classification methods. [@NaiveBay]
+
+### Original Dataset
+
+```{r,echo = TRUE, message = FALSE, warning = FALSE}
+NaiveBayesModel <- train(class~.,
+                      trainData,
+                      method="nb",
+                      metric="ROC",
+                      preProcess=c('center', 'scale'), #in order to normalize the data
+                      trace=FALSE, 
+                      importance = TRUE,
+                      trControl=fitControl)
+
+NBPrediction <- predict(NaiveBayesModel, testData)
+NBConfMatrix <- confusionMatrix(NBPrediction, as.factor(testData$class), positive = "Abnormal")
+NBConfMatrix
+```
+
+### Cleaned Dataset
+
+```{r,echo = TRUE, message = FALSE, warning = FALSE}
+NaiveBayesModel2 <- train(class~.,
+                      trainData2,
+                      method="nb",
+                      metric="ROC",
+                      preProcess=c('center', 'scale'), #in order to normalize the data
+                      trace=FALSE, 
+                      importance = TRUE,
+                      trControl=fitControl2)
+
+NBPrediction2 <- predict(NaiveBayesModel2, testData2)
+NBConfMatrix2 <- confusionMatrix(NBPrediction2, as.factor(testData2$class), positive = "Abnormal")
+NBConfMatrix2
+```
+
+There is a positive effect on the Naive Bayes Model from the removal of the highly correlated variable. 
+
+The accuracy of the Cleaned Dataset model can be noted being 0.7419 where as the Original Dataset model had and accuracy of 0.6935. It seems that the Naive Bayes Model is performing fairly well
+
+In a later discussion other metrics will be discussed, such as:
+
+* Sensitivity (recall) represent the true positive rate: the proportions of actual positives correctly identified.
+* Specificity is the true negative rate: the proportion of actual negatives correctly identified.
+* Accuracy is the general score of the classifier model performance as it is the ratio of how many samples are correctly classified to all samples.
+* F1 score: the harmonic mean of precision and sensitivity.
+* Accuracy and F1 score would be used to compare the result with the benchmark model.
+* Precision: the number of correct positive results divided by the number of all positive results returned by the classifier.
+
+## Random Forest [RF]
+
+The RF is one of the most powerful machine learning algorithms available. RF is a supervised machine learning algorithm that can be used for both classification and regression tasks. The algorithm addresses the shortcomings of decision trees by using a clever tick. Its goal is to improve prediction performance and reduce instability by averaging multiple decision trees. RF is made from a group of individual decision trees, this technique is called Ensemble Learning. A large group of uncorrelated decision trees can produce more accurate and stable results than any of individual decision trees.
+
+Training a RF for a classification task, is actually training a group of decision trees. Then by obtaining all the predictions of each individual trees and can use these predictions to predict the class that gets the most votes. Although some individual trees produce wrong predictions, many can produce accurate predictions. As a group, they can move towards accurate predictions. [@RForest]
+
+### Original Dataset
+
+```{r,echo = TRUE, message = FALSE, warning = FALSE}
+
+RandomforestModel <- train(class~.,
+                            trainData,
+                            method="rf",  
+                            metric="ROC",
+                            #tuneLength=10,
+                            #tuneGrid = expand.grid(mtry = c(2, 3, 6)),
+                            preProcess = c('center', 'scale'),
+                            trControl=fitControl)
+
+RFPrediction <- predict(RandomforestModel, testData)
+#Check results
+RFConfMatrix <- confusionMatrix(RFPrediction, as.factor(testData$class), positive = "Abnormal")
+RFConfMatrix
+```
+
+#### Plot of Variable Importance
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, error=FALSE}
+varImp(RandomforestModel)
+```
+
+```{r}
+plot(varImp(RandomforestModel), main="Ranking Of Importance")
+```
+
+### Cleaned Dataset
+
+```{r,echo = TRUE, message = FALSE, warning = FALSE}
+
+RandomforestModel2 <- train(class~.,
+                            trainData2,
+                            method="rf",
+                            metric="ROC",
+                            preProcess = c('center', 'scale'),
+                            trControl=fitControl2)
+
+RFPrediction2 <- predict(RandomforestModel2, testData2)
+#Check results
+RFConfMatrix2 <- confusionMatrix(RFPrediction2, as.factor(testData2$class), positive = "Abnormal")
+RFConfMatrix2
+```
+
+#### Plot of Variable Importance
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, error=FALSE}
+varImp(RandomforestModel2)
+```
+
+```{r}
+plot(varImp(RandomforestModel2), main="Ranking Of Importance")
+```
+
+The removal of the highly correlated variable from the original dataset had negitive impact on the Random Forest Model. This can be seen from the decrease in the Accuracy and Specificity.
+
+## Logistic Regression Model [LogReg]
+
+LogReg is mainly used for binary classification. A binary logistic model is used to estimate the probability of a binary response based on one or more predictor (or independent) variables (features).
+
+### Original Dataset
+
+```{r,echo = TRUE, message = FALSE, warning = FALSE}
+LogRegModel<- train(class~., data = trainData, 
+                     method = "glm",
+                     metric = "ROC",
+                     preProcess = c("scale", "center"),  # in order to normalize the data
+                     trControl= fitControl)
+
+LogRegPred <- predict(LogRegModel, testData)
+# Check results
+LogRegConfMatrix <- confusionMatrix(LogRegPred, as.factor(testData$class), positive = "Abnormal")
+LogRegConfMatrix
+```
+
+#### Plot of Variable Importance
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, error=FALSE}
+varImp(LogRegModel)
+```
+
+```{R}
+plot(varImp(LogRegModel), main="Ranking Of Importance")
+```
+
+### Cleaned Dataset
+
+```{r,echo = TRUE, message = FALSE, warning = FALSE}
+LogRegModel2<- train(class~., data = trainData2, 
+                     method = "glm",
+                     metric = "ROC",
+                     preProcess = c("scale", "center"),  # in order to normalize the data
+                     trControl= fitControl2)
+
+LogRegPred2 <- predict(LogRegModel2, testData2)
+# Check results
+LogRegConfMatrix2 <- confusionMatrix(LogRegPred2, as.factor(testData2$class), positive = "Abnormal")
+LogRegConfMatrix2
+```
+
+#### Plot of Variable Importance
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, error=FALSE}
+varImp(LogRegModel2)
+```
+
+```{R}
+plot(varImp(LogRegModel2), main="Ranking Of Importance")
+```
+
+There is no impact on the LogReg model with the removal of the highly correlated variable.
+
+## K Nearest Neighbor (KNN) Model
+
+KNN is a supervised learning algorithms that is commonly used in data mining and machine learning. It is a classifier algorithm, learning is based “how similar” is a data from one another. KNN is a simple algorithm that stores all available cases and classifies new cases based on a similarity measure. The KNN algorithm assumes that similar things exist in close proximity [@KNN2].  
+
+### Original Dataset
+
+```{r,echo = TRUE, message = FALSE, warning = FALSE}
+KNNModel <- train(class~.,
+                   trainData,
+                   method="knn",
+                   metric="ROC",
+                   preProcess = c('center', 'scale'),
+                   tuneLength=10, 
+                   trControl=fitControl)
+
+KNNPred <- predict(KNNModel, testData)
+KNNConfMatrix <- confusionMatrix(KNNPred, as.factor(testData$class), positive = "Abnormal")
+KNNConfMatrix
+```
+
+#### Plot of ROC vs Number of Neighbors
+
+```{r,fig.align='center'}
+print(ggplot(KNNModel))
+```
+
+### Cleaned Dataset
+
+```{r,echo = TRUE, message = FALSE, warning = FALSE}
+KNNModel2 <- train(class~.,
+                   trainData2,
+                   method="knn",
+                   metric="ROC",
+                   preProcess = c('center', 'scale'),
+                   tuneLength=10, 
+                   trControl=fitControl2)
+
+KNNPred2 <- predict(KNNModel2, testData2)
+KNNConfMatrix2 <- confusionMatrix(KNNPred2, as.factor(testData2$class), positive = "Abnormal")
+KNNConfMatrix2
+```
+
+
+
+#### Plot of ROC vs Number of Neighbors
+
+```{r,fig.align='center'}
+print(ggplot(KNNModel2))
+```
+
+Once again there is very little impact cause by removing the highly correlated variables, there is only a small increase in the accuracy from the Original to the Cleaned Dataset.
+
+## Neural Network with LDA Model
+
+Artificial Neural Networks [NN] is a type of mathematical algorithms that imitates the simulation of networks of biological neurons. It tries to imatate the human brains neural pathways.
+
+An NN consists of nodes (called neurons) and edges (called synapses). Input data is transmitted through the weighted synapses to the neurons. The neurons make calculations that are processed and then passed onto the next neurons passed to a neuron representing the output (this implise that end).
+
+NN creates a weighting for connections between neurons. Once all weightings have been trained, the NN is able to use these connection make predictions from the input data. NN make use of both forward and Backpropagation. Backpropagations the set of learning rules used to guide NN. [@NNs]
+
+### Original Dataset
+
+#### Test and Training data
+```{r}
+trainDataLda <- ldaDataPredict[datSamplingIndex, ]
+testDataLda <- ldaDataPredict[-datSamplingIndex, ]
+```
+
+#### Model
+```{r,echo = TRUE, message = FALSE, warning = FALSE}
+NNLDAModel <- train(class~., 
+                 trainDataLda,
+                 method="nnet",
+                 metric="ROC",
+                 preProcess=c('center', 'scale'),
+                 tuneLength=10,
+                 trace=FALSE,
+                 trControl=fitControl)
+
+NNLdaPred <- predict(NNLDAModel, testDataLda)
+NNLdaConfMatrix <- confusionMatrix(NNLdaPred, as.factor(testDataLda$class), positive = "Abnormal")
+NNLdaConfMatrix
+```
+
+### Cleaned Dataset
+
+#### Test and Training data
+```{r}
+trainDataLda2 <- ldaDataPredict[datSamplingIndex, ]
+testDataLda2 <- ldaDataPredict[-datSamplingIndex, ]
+```
+
+#### Model
+```{r,echo = TRUE, message = FALSE, warning = FALSE}
+NNLDAModel2 <- train(class~., 
+                 trainDataLda2,
+                 method="nnet",
+                 metric="ROC",
+                 preProcess=c('center', 'scale'),
+                 tuneLength=10,
+                 trace=FALSE,
+                 trControl=fitControl2)
+
+NNLdaPred2 <- predict(NNLDAModel2, testDataLda2)
+NNLdaConfMatrix2 <- confusionMatrix(NNLdaPred2, as.factor(testDataLda2$class), positive = "Abnormal")
+NNLdaConfMatrix2
+```
+
+There has been no impact from using the Cleaned Dataset
+
+## Neural Network with PCA Model
+
+### Original Dataset
+
+```{r,echo = TRUE, message = FALSE, warning = FALSE}
+NNPCAModel <- train(class~.,
+                        trainData,
+                        method="nnet",
+                        metric="ROC",
+                        preProcess=c('center', 'scale', 'pca'),
+                        tuneLength=10,
+                        trace=FALSE,
+                        trControl=fitControl)
+
+NNPcaPred <- predict(NNPCAModel, testData)
+NNPcaConfMatrix <- confusionMatrix(NNPcaPred, as.factor(testData$class), positive = "Abnormal")
+NNPcaConfMatrix
+```
+
+#### Plot of Variable Importance
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, error=FALSE}
+varImp(NNPCAModel)
+```
+
+```{r}
+plot(varImp(NNPCAModel), main="Ranking Of Importance")
+```
+
+### Cleaned Dataset
+
+```{r,echo = TRUE, message = FALSE, warning = FALSE}
+NNPCAModel2 <- train(class~.,
+                        trainData2,
+                        method="nnet",
+                        metric="ROC",
+                        preProcess=c('center', 'scale', 'pca'),
+                        tuneLength=10,
+                        trace=FALSE,
+                        trControl=fitControl2)
+
+NNPcaPred2 <- predict(NNPCAModel2, testData2)
+NNPcaConfMatrix2 <- confusionMatrix(NNPcaPred2, as.factor(testData2$class), positive = "Abnormal")
+NNPcaConfMatrix2
+```
+
+There has been a negative impact from using the Cleaned Dataset on the NN using PCA. This can be seen via the decrease in accuracy from 0.8226 to 0.8065, from the Original to the Clean Dataset respectively. 
+
+#### Plot of Variable Importance
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, error=FALSE}
+varImp(NNPCAModel2)
+```
+
+```{r}
+plot(varImp(NNPCAModel2), main="Ranking Of Importance")
+```
+
+ 
+
+\newpage
+
+# Results
+
+## Original DataSet
+
+### Model Comparisions 
+
+```{r}
+models <- list(NaiveBayes = NaiveBayesModel, 
+                    LogReg = LogRegModel,
+                    RandomForest = RandomforestModel,
+                    KNN = KNNModel,
+                    NeuralPCA = NNPCAModel,
+                    NeuralLDA = NNLDAModel)   
+
+modelsResults <- resamples(models)
+summary(modelsResults)
+```
+
+
+
+```{r,fig.align='center'}
+print(bwplot(modelsResults, metric="ROC",main = "Variablities"))
+```
+
+As we can observe from the plot above, Three models, Naive Bayes , Neural LDA and Random Forest have great variability.
+
+The Receiver Operating characteristic Curve [ROC] is a graph that shows the performance of a classification model at all classification thresholds. AUC is the metric measure of the ROC curve of each model. This metric is independent of any threshold [@ROCCurve]. 
+
+The NN LDA model managed to achieve a great Area Under the ROC Curve [AUC] but has a high variability. Secondly the NN PCA managed to also achieve a good Area Under the ROC Curve but with less variability that the NN LDA which indicates that it is performing better.\
+
+```{r}
+confMatrixs <- list(
+  NaiveBayes = NBConfMatrix, 
+  LogReg = LogRegConfMatrix,
+  RandomForest = RFConfMatrix,
+  KNN = KNNConfMatrix,
+  NeuralPCA = NNPcaConfMatrix,
+  NeuralLDA = NNPcaConfMatrix)   
+
+ConfMatrixResults <- sapply(confMatrixs, function(x) x$byClass)
+ConfMatrixResults %>% knitr::kable()
+```
+
+## Cleaned DataSet
+
+### Model Comparisions 
+
+```{r}
+models2 <- list(NaiveBayes = NaiveBayesModel2, 
+                    LogReg = LogRegModel2,
+                    RandomForest = RandomforestModel2,
+                    KNN = KNNModel2,
+                    NeuralPCA = NNPCAModel2,
+                    NeuralLDA = NNLDAModel2)   
+
+modelsResults2 <- resamples(models2)
+summary(modelsResults2)
+```
+
+```{r,fig.align='center'}
+bwplot(modelsResults2, metric="ROC",main = "Variablities")
+```
+
+Comparing the Cleaned Dataset to the original it is important to note although the had been no real differences seen when running the models. There is a clear difference when comparing the variability plots. It is clear that by removing the highly correlated variable reduced some of the variability in the ROC for particular Models which is good, but also has seemed to increase variability in some of the other models
+
+From the plot above it is clear that the models now experiencing the greatest variability are Naive Bayes and Neural LDA. The models now with the best ROC are the LogReg and Neural PCA. 
+
+```{r}
+confMatrixs2 <- list(
+  NaiveBayes = NBConfMatrix2, 
+  LogReg = LogRegConfMatrix2,
+  RandomForest = RFConfMatrix2,
+  KNN = KNNConfMatrix2,
+  NeuralPCA = NNPcaConfMatrix2,
+  NeuralLDA = NNPcaConfMatrix2)   
+
+ConfMatrixResults2 <- sapply(confMatrixs2, function(x) x$byClass)
+ConfMatrixResults2 %>% knitr::kable()
+```
+
+\newpage
+
+## Discussion
+
+The following metrics will be compared in this discussion:
+
+* Accuracy: It is the number of correct predictions made divided by the total number of predictions made, multiplied by 100 to turn it into a percentage.
+
+* Precision is the number of True Positives divided by the number of True Positives and False Positives. Or can be referred to as the number of positive predictions divided by the total number of positive class values predicted. This is refered to as the Positive Predictive Value (PPV). A low precision can indicate a large number of False Positives.
+
+* Sensitivity or True Positive Rate [recall] is the number of True Positives divided by the number of True Positives and the number of False Negatives. Or can be seen as the number of positive predictions divided by the number of positive class values in the test data. Recall can be thought of as a measure of a classifiers completeness. A low recall indicates many False Negatives.
+
+* The F1 Score is calculated from: 2 x ((precision x recall) / (precision + recall)). It is also called the F Score or the F Measure. The F1 score conveys the balance between the precision and the recall.
+
+### Original Dataset
+
+From within the original datset :
+
+The best results for sensitivity (detection of Abnormal features of orthopedic patients) is NN Model with the PCA model which also has the best F1 score. It should be note the NN Model with PCA model and the NN Model with LDA have the same Sensitivity score. As the PCA model has the best F1 store it has been rated as best overall. 
+
+```{r}
+MaxConfMatrix <- apply(ConfMatrixResults, 1, which.is.max)
+OutputReport <- data.frame(metric=names(MaxConfMatrix), 
+                            bestModel=colnames(ConfMatrixResults)[MaxConfMatrix],
+                            value=mapply(function(x,y) {ConfMatrixResults[x,y]}, 
+                                         names(MaxConfMatrix), 
+                                         MaxConfMatrix))
+rownames(OutputReport) <- NULL
+OutputReport
+```
+
+### Cleaned Dataset
+
+From within the Cleaned Dataset datset :
+
+The best results for sensitivity (detection of Abnormal features of orthopedic patients) is the LogReg which also has the best F1 score.
+
+```{r}
+MaxConfMatrix2 <- apply(ConfMatrixResults2, 1, which.is.max)
+OutputReport2 <- data.frame(metric=names(MaxConfMatrix2), 
+                            bestModel=colnames(ConfMatrixResults2)[MaxConfMatrix2],
+                            value=mapply(function(x,y) {ConfMatrixResults2[x,y]}, 
+                                         names(MaxConfMatrix2), 
+                                         MaxConfMatrix2))
+rownames(OutputReport2) <- NULL
+OutputReport2
+```
+\newpage
+
+# Conclusion 
+
+This paper treats the Biomechanical features of orthopedic patients diagnosis problem as a pattern classification problem. This report investigates several machine learning models the optimal model is selected by selecting a high accuracy level combined with a low rate of false-negatives (meaning high sensitivity).
+
+From this it can be concluded that from the Original Dataset the NN Model with the PCA Model had the optimal results for F1 (0.8674699), Sensitivity (0.8571429) and Balanced Accuracy (0.8035714).
+
+Secondly it can also be concluded that from the Cleaned Dataset the LogReg Model had the optimal results for F1 (0.8674699), Sensitivity (0.8571429) and Balanced Accuracy (0.8035714).
+
+To draw a conclusion in good machine learning practise it is always best to remove highly correlated variable. Therefore one should theoretical use the Cleaned Dataset with the LogReg model when making predictions.
+
+## Future work
+
+Future work on this particular project should focus on checking whether the predictions made by the models that had the optimal results actually give outputs that can be trusted. This could be done by supplying the Models with unfinished data and comparing the models results to verified data. 
+
+Also future work should focus on trying to improve the models accuracy and reducing the variability further. 
+
+\newpage
+
+# Appendix 
+
+## Environment
+
+```{r}
+print("Operating System:")
+version
+```
+# References
+
