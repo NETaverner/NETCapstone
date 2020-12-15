@@ -17,9 +17,11 @@ if(!require(nnet)) install.packages("nnet", repos = "http://cran.us.r-project.or
 if(!require(funModeling)) install.packages("funModeling", repos = "http://cran.us.r-project.org")
 #if(!require(Momocs)) install.packages("Momocs", repos = "http://cran.us.r-project.org")
 #if(!require(klaR)) install.packages("klaR", repos = "http://cran.us.r-project.org")
+if(!require(RefManageR)) install.packages("RefManageR", repos = "http://cran.us.r-project.org")
+if(!require(kableExtra)) install.packages("kableExtra", repos = "http://cran.us.r-project.org")
 
 
-# The data file will be loaded from my personal github account
+# The data file will be loaded from my personal computer
 data <- read.csv("/Users/user/Documents/DataScience/FinalCapstone/NETCapstone/DataFiles/column_2C_weka.csv")
 
 # attributes 
@@ -103,41 +105,51 @@ grid.arrange(pc1, pc2, ncol=2)
 
 #NEW
 
-pca_res_data2 <- prcomp(data2[,0:5], center = TRUE, scale = TRUE)
-plot(pca_res_data2, type="l")
+PCAData2 <- prcomp(data2[,0:5], center = TRUE, scale = TRUE)
+plot(PCAData2, type="l")
 
 
-summary(pca_res_data2)
+summary(PCAData2)
 
 #The above table shows that 95% of the variance is explained with 4 PC's in the transformed dataset data2.
 
-pca_df <- as.data.frame(pca_res_data2$x)
-ggplot(pca_df, aes(x=PC1, y=PC2, col=data$class)) + geom_point(alpha=0.5)
+PcaDf2 <- as.data.frame(PCAData2$x)
+ggplot(PcaDf2, aes(x=PC1, y=PC2, col=data$class)) + geom_point(alpha=0.5)
 
 #The data of the first 2 components can be easly separated into two classes. This is caused by the fact that the variance explained by these components is not large. The data can be easly separated.
 
-
-g_pc1 <- ggplot(pca_df, aes(x=PC1, fill=data$class)) + geom_density(alpha=0.25)  
-g_pc2 <- ggplot(pca_df, aes(x=PC2, fill=data$class)) + geom_density(alpha=0.25)  
-grid.arrange(g_pc1, g_pc2, ncol=2)
-
-
+pc12 <- ggplot(PcaDf2, aes(x=PC1, fill=data$class)) + geom_density(alpha=0.25)  
+pc22 <- ggplot(PcaDf2, aes(x=PC2, fill=data$class)) + geom_density(alpha=0.25)  
+grid.arrange(pc12, pc22, ncol=2)
 
 #Linear Discriminant Analysis (LDA)
+
+#OG
+
 
 LdaData <- MASS::lda(class~., data = data, center = TRUE, scale = TRUE) 
 LdaData
 #Data frame of the LDA for visualization purposes
 ldaDataPredict <- predict(LdaData, data)$x %>% as.data.frame() %>% cbind(class=data$class)
 
+#density plot
+ggplot(ldaDataPredict, aes(x=LD1, fill=class)) + geom_density(alpha=0.5)
 
-#Plot density of LD1
-ggplot(lda_df_predict, aes(x=LD1, fill=class)) + geom_density(alpha=0.5)
+#Clean
 
+
+LdaData2 <- MASS::lda(class~., data = data2, center = TRUE, scale = TRUE) 
+LdaData2
+#Data frame of the LDA for visualization purposes
+ldaDataPredict2 <- predict(LdaData2, data2)$x %>% as.data.frame() %>% cbind(class=data2$class)
+
+ggplot(ldaDataPredict2, aes(x=LD1, fill=class)) + geom_density(alpha=0.5)
 
 # Methods
 
 #creating train and training/validation datasets
+
+#OG
 
 set.seed(1, sample.kind="Rounding") #if using R 3.5 or earlier, use `set.seed(1)
 #Train (80% of data)
@@ -155,9 +167,23 @@ fitControl <- trainControl(method="cv",    #Control the computational nuances of
                            number = 20,    #Either the number of folds or number of resampling iterations
                            classProbs = TRUE,
                            summaryFunction = twoClassSummary)
+
+#clean
+#Train (80% of data)
+data3 <- cbind (class=data$class, data2)
+trainData2 <- data3[datSamplingIndex, ]
+#Test (20%)
+testData2 <- data3[-datSamplingIndex, ]
+
+
+fitControl2 <- trainControl(method="cv",    
+                            number = 20,    
+                            classProbs = TRUE,
+                            summaryFunction = twoClassSummary)
+
 # Naive Bayes Model
 
-
+#OG
 NaiveBayesModel <- train(class~.,
                       trainData,
                       method="nb",
@@ -178,9 +204,25 @@ NBConfMatrix
 
 ###plot(varImp(NaiveBayesModel)) Doesn't work
 
+
+#clean 
+
+NaiveBayesModel2 <- train(class~.,
+                          trainData2,
+                          method="nb",
+                          metric="ROC",
+                          preProcess=c('center', 'scale'), #in order to normalize the data
+                          trace=FALSE, 
+                          importance = TRUE,
+                          trControl=fitControl2)
+
+NBPrediction2 <- predict(NaiveBayesModel2, testData2)
+NBConfMatrix2 <- confusionMatrix(NBPrediction2, as.factor(testData2$class), positive = "Abnormal")
+NBConfMatrix2
+
 # Random Forest
 
-
+#OG
 RandomforestModel <- train(class~.,
                             trainData,
                             method="rf",  #also recommended ranger, because it is a lot faster than original randomForest (rf)
@@ -198,8 +240,25 @@ RFConfMatrix
 #plot importance
 varImp(RandomforestModel)
 
-plot(varImp(RandomforestModel), main="Top variables- Random Forest")
+plot(varImp(RandomforestModel), main="Ranking Of Importance")
 
+#clean
+
+RandomforestModel2 <- train(class~.,
+                            trainData2,
+                            method="rf",
+                            metric="ROC",
+                            preProcess = c('center', 'scale'),
+                            trControl=fitControl2)
+
+RFPrediction2 <- predict(RandomforestModel2, testData2)
+#Check results
+RFConfMatrix2 <- confusionMatrix(RFPrediction2, as.factor(testData2$class), positive = "Abnormal")
+RFConfMatrix2
+
+varImp(RandomforestModel2)
+
+plot(varImp(RandomforestModel2), main="Ranking Of Importance")
 
 
 # fit12_rf <- train(class ~., 
@@ -215,6 +274,7 @@ plot(varImp(RandomforestModel), main="Top variables- Random Forest")
 
 # Logistic Regression Model 
 
+#OG 
 LogRegModel<- train(class~., data = trainData, 
                      method = "glm",
                      metric = "ROC",
@@ -227,13 +287,30 @@ LogRegConfMatrix <- confusionMatrix(LogRegPred, as.factor(testData$class), posit
 LogRegConfMatrix
 
 #plot of importance
+varImp(LogRegModel)
+plot(varImp(LogRegModel), main="Ranking Of Importance")
 
-plot(varImp(LogRegModel), main="Top variables - Log Regr")
+#Clean
+LogRegModel2<- train(class~., data = trainData2, 
+                     method = "glm",
+                     metric = "ROC",
+                     preProcess = c("scale", "center"),  # in order to normalize the data
+                     trControl= fitControl2)
+
+LogRegPred2 <- predict(LogRegModel2, testData2)
+# Check results
+LogRegConfMatrix2 <- confusionMatrix(LogRegPred2, as.factor(testData2$class), positive = "Abnormal")
+LogRegConfMatrix2
+
+#var Importance
+varImp(LogRegModel2)
+
+plot(varImp(LogRegModel2), main="Ranking Of Importance")
 
 
 
 # K Nearest Neighbor (KNN) Model
-
+#OG
 KNNModel <- train(class~.,
                    trainData,
                    method="knn",
@@ -255,8 +332,23 @@ KNNConfMatrix
 
 ggplot(KNNModel)
 
-RMSE(KNNPred,testData$class)
+#RMSE(KNNPred,testData$class) don't use
 
+#clean
+
+KNNModel2 <- train(class~.,
+                   trainData2,
+                   method="knn",
+                   metric="ROC",
+                   preProcess = c('center', 'scale'),
+                   tuneLength=10, 
+                   trControl=fitControl2)
+
+KNNPred2 <- predict(KNNModel2, testData2)
+KNNConfMatrix2 <- confusionMatrix(KNNPred2, as.factor(testData2$class), positive = "Abnormal")
+KNNConfMatrix2
+
+print(ggplot(KNNModel2))
 
 # TrainDatas <- data[,1:6]
 # TrainClasses <- data[,6]
@@ -270,6 +362,7 @@ RMSE(KNNPred,testData$class)
 
 # Neural Network with LDA Model
 
+#OG
 #test and training data
 trainDataLda <- ldaDataPredict[datSamplingIndex, ]
 testDataLda <- ldaDataPredict[-datSamplingIndex, ]
@@ -288,41 +381,117 @@ NNLdaPred <- predict(NNLDAModel, testDataLda)
 NNLdaConfMatrix <- confusionMatrix(NNLdaPred, as.factor(testDataLda$class), positive = "Abnormal")
 NNLdaConfMatrix
 
+#Clean
 
+trainDataLda2 <- ldaDataPredict[datSamplingIndex, ]
+testDataLda2 <- ldaDataPredict[-datSamplingIndex, ]
+
+#model
+
+NNLDAModel2 <- train(class~., 
+                     trainDataLda2,
+                     method="nnet",
+                     metric="ROC",
+                     preProcess=c('center', 'scale'),
+                     tuneLength=10,
+                     trace=FALSE,
+                     trControl=fitControl2)
+
+NNLdaPred2 <- predict(NNLDAModel2, testDataLda2)
+NNLdaConfMatrix2 <- confusionMatrix(NNLdaPred2, as.factor(testDataLda2$class), positive = "Abnormal")
+NNLdaConfMatrix2
 
 
 # Neural Network with PCA Model
-
+#OG
 NNPCAModel <- train(class~.,
-                        trainData,
-                        method="nnet",
-                        metric="ROC",
-                        preProcess=c('center', 'scale', 'pca'),
-                        tuneLength=10,
-                        trace=FALSE,
-                        trControl=fitControl)
+                    trainData,
+                    method="nnet",
+                    metric="ROC",
+                    preProcess=c('center', 'scale', 'pca'),
+                    tuneLength=10,
+                    trace=FALSE,
+                    trControl=fitControl)
 
 NNPcaPred <- predict(NNPCAModel, testData)
 NNPcaConfMatrix <- confusionMatrix(NNPcaPred, as.factor(testData$class), positive = "Abnormal")
 NNPcaConfMatrix
 
-plot(varImp(NNPCAModel), main="Top variables - NNET PCA")
+
+varImp(NNPCAModel)
+
+plot(varImp(NNPCAModel), main="Ranking Of Importance")
+
+#Clean
+NNPCAModel2 <- train(class~.,
+                     trainData2,
+                     method="nnet",
+                     metric="ROC",
+                     preProcess=c('center', 'scale', 'pca'),
+                     tuneLength=10,
+                     trace=FALSE,
+                     trControl=fitControl2)
+
+NNPcaPred2 <- predict(NNPCAModel2, testData2)
+NNPcaConfMatrix2 <- confusionMatrix(NNPcaPred2, as.factor(testData2$class), positive = "Abnormal")
+NNPcaConfMatrix2
+
+#var importance
+varImp(NNPCAModel2)
+
+plot(varImp(NNPCAModel2), main="Ranking Of Importance")
 
 #Results
 # comparisons
 
-models <- list(Naive_Bayes = NaiveBayesModel, 
-                    Logistic_regr = LogRegModel,
-                    Random_Forest = RandomforestModel,
-                    KNN = KNNModel,
-                    Neural_PCA = NNPCAModel,
-                    Neural_LDA = NNLDAModel)   
+#OG
+models <- list(NaiveBayes = NaiveBayesModel, 
+               LogReg = LogRegModel,
+               RandomForest = RandomforestModel,
+               KNN = KNNModel,
+               NeuralPCA = NNPCAModel,
+               NeuralLDA = NNLDAModel)   
 
 modelsResults <- resamples(models)
 summary(modelsResults)
 
+print(bwplot(modelsResults, metric="ROC",main = "Variablities"))
+
+confMatrixs <- list(
+  NaiveBayes = NBConfMatrix, 
+  LogReg = LogRegConfMatrix,
+  RandomForest = RFConfMatrix,
+  KNN = KNNConfMatrix,
+  NeuralPCA = NNPcaConfMatrix,
+  NeuralLDA = NNPcaConfMatrix)   
+
+ConfMatrixResults <- sapply(confMatrixs, function(x) x$byClass)
+ConfMatrixResults %>% knitr::kable()
+
+#Clean
+models2 <- list(NaiveBayes = NaiveBayesModel2, 
+                LogReg = LogRegModel2,
+                RandomForest = RandomforestModel2,
+                KNN = KNNModel2,
+                NeuralPCA = NNPCAModel2,
+                NeuralLDA = NNLDAModel2)   
+
+modelsResults2 <- resamples(models2)
+summary(modelsResults2)
+
 #Plot variablities
-bwplot(modelsResults, metric="ROC")
+bwplot(modelsResults2, metric="ROC",main = "Variablities")
+
+confMatrixs2 <- list(
+  NaiveBayes = NBConfMatrix2, 
+  LogReg = LogRegConfMatrix2,
+  RandomForest = RFConfMatrix2,
+  KNN = KNNConfMatrix2,
+  NeuralPCA = NNPcaConfMatrix2,
+  NeuralLDA = NNPcaConfMatrix2)   
+
+ConfMatrixResults2 <- sapply(confMatrixs2, function(x) x$byClass)
+ConfMatrixResults2 %>% knitr::kable()
 
 
 
@@ -341,14 +510,25 @@ ConfMatrixResults %>% knitr::kable()
 
 #discussion 
 
+#original
 MaxConfMatrix <- apply(ConfMatrixResults, 1, which.is.max)
-output_report <- data.frame(metric=names(MaxConfMatrix), 
-                            best_model=colnames(ConfMatrixResults)[MaxConfMatrix],
-                            value=mapply(function(x,y) {ConfMatrixResults[x,y]}, 
-                                         names(MaxConfMatrix), 
-                                         MaxConfMatrix))
-rownames(output_report) <- NULL
-output_report
+OutputReport <- data.frame(metric=names(MaxConfMatrix), 
+                           bestModel=colnames(ConfMatrixResults)[MaxConfMatrix],
+                           value=mapply(function(x,y) {ConfMatrixResults[x,y]}, 
+                                        names(MaxConfMatrix), 
+                                        MaxConfMatrix))
+rownames(OutputReport) <- NULL
+OutputReport
+
+#clean
+MaxConfMatrix2 <- apply(ConfMatrixResults2, 1, which.is.max)
+OutputReport2 <- data.frame(metric=names(MaxConfMatrix2), 
+                            bestModel=colnames(ConfMatrixResults2)[MaxConfMatrix2],
+                            value=mapply(function(x,y) {ConfMatrixResults2[x,y]}, 
+                                         names(MaxConfMatrix2), 
+                                         MaxConfMatrix2))
+rownames(OutputReport2) <- NULL
+OutputReport2
 
 
 
